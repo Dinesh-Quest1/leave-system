@@ -1,0 +1,69 @@
+<div class="table-container">
+  <table class="custom-table">
+    <thead>
+      <tr>
+        <th *ngFor="let column of columns">{{ column.header }}</th>
+        <!-- <ng-container *ngIf="actions?.length">
+          <th>Action</th>
+        </ng-container> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dataItem of list">
+        <ng-container *ngFor="let column of columns; let i = index">
+          <!-- <td *ngIf="dataItem[column.field]">{{ dataItem[column.field] }}</td> -->
+
+          <ng-container *ngIf="!column?.actions && !column.template">
+            <td>
+              {{ column.format ? column.format(dataItem?.[column.field]) : dataItem?.[column.field] }}
+            </td>
+          </ng-container>
+          <ng-container *ngIf="column?.actions">
+            <td class="action-buttons">
+              <ng-container
+                *ngFor="let action of column.actions; let i = index"
+              >
+                <ng-container *ngIf="action.header === 'edit'">
+                  <button class="btn edit" (click)="action.action(dataItem)">
+                    ✏️
+                  </button>
+                </ng-container>
+                <ng-container *ngIf="action.header === 'view'">
+                  <button class="btn view" (click)="action.action(dataItem)">
+                    👁️
+                  </button>
+                </ng-container>
+                <ng-container *ngIf="action.header === 'delete'">
+                  <button class="btn delete" (click)="action.action(dataItem)">
+                    🗑️
+                  </button>
+                </ng-container>
+                <ng-container *ngIf="action.template">
+                  <ng-template
+                    *ngIf="action.template"
+                    [ngTemplateOutlet]="action.template"
+                  ></ng-template>
+                </ng-container>
+              </ng-container>
+            </td>
+          </ng-container>
+          <ng-container *ngIf="column?.template">
+            <!-- <ng-template [ngTemplateOutlet]="column.template"></ng-template> -->
+            <td>
+              <label class="switch">
+                <input type="checkbox" value="{{ column.status }}" />
+                <span class="slider round"></span>
+              </label>
+            </td>
+          </ng-container>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+  <app-pagination
+    [totalPages]="totalPages"
+    [currentPage]="currentPage"
+    (onPageChange)="pageChange($event)"
+    (onPageSizeChange)="pageSizeChange($event)"
+  ></app-pagination>
+</div>
