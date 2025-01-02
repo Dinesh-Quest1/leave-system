@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'secondary-contact-info',
@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './secondary-contact-info.component.html',
   styleUrl: './secondary-contact-info.component.scss',
 })
-export class SecondaryContactInfoComponent {}
+export class SecondaryContactInfoComponent {
+  @Input() userForm: any;
+}

@@ -6,6 +6,7 @@ import { SecondaryContactInfoComponent } from './secondary-contact-info/secondar
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { getUsers } from '../../../stores/app.selector';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'user-details',
@@ -26,6 +27,15 @@ export class UserDetails implements OnInit {
   store: Store = inject(Store);
 
   currentUser: any;
+
+  userForm = new FormGroup({
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+  });
+
+  onSubmit(values: any) {
+    console.log(values);
+  }
 
   ngOnInit() {
     const userId = this.route.snapshot.paramMap.get('user');

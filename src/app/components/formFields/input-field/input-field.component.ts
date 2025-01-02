@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
@@ -11,9 +11,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   styleUrl: './input-field.component.scss',
 })
 export class InputFieldComponent {
+  @Input() formControl: any;
   @Input() name: string = 'name';
-  @Input() label: string = '';
-  @Input() placeholder: string = '';
+  @Input() label: string = 'Name';
+  @Input() placeholder: string = 'Name';
   @Input() type: string = 'text';
   @Input() required: boolean = false;
   @Input() disabled: boolean = false;

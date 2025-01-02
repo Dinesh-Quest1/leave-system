@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { InputFieldComponent } from '../../../../components/formFields/input-field/input-field.component';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -10,12 +10,5 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './basic-info.component.scss',
 })
 export class BasicInfoComponent {
-  profileForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-  });
-
-  onSubmit(values: any) {
-    console.log(values);
-  }
+  @Input() userForm: any;
 }
