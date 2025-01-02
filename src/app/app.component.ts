@@ -17,8 +17,5 @@ export class AppComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
   router: Router = inject(Router);
 
-  ngOnInit() {
-    const currentUrl = this.router.url;
-    console.log({ currentUrl });
-  }
+  ngOnInit() {}
 }

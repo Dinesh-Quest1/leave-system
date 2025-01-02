@@ -113,7 +113,6 @@ export class UsersList implements OnInit {
 
   ngOnInit() {
     this.store.select(getUsers).subscribe((value: any[]) => {
-      console.log({ users: value });
       this.list = value;
     });
   }
