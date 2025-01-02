@@ -1,0 +1,13 @@
+<h4>Basic Info</h4>
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit($event)">
+  <input-field
+    [label]="'First Name'"
+    [name]="'firstName'"
+    [value]=""
+  ></input-field>
+  <input-field
+    [label]="'lastName'"
+    [name]="'lastName'"
+    [value]=""
+  ></input-field>
+</form>

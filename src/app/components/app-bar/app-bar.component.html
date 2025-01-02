@@ -1,0 +1,16 @@
+<div class="app-bar-container">
+  <div class="logo-section">
+    <img src="assets/logo.jpg" alt="logo" class="logo" />
+    <ul class="nav-items">
+      <li class="nav-item" *ngFor="let navItem of navItems">
+        <a class="nav-link" routerLink="{{ navItem.navigateTo }}">{{
+          navItem.name
+        }}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="action-section">
+    <button type="button" class="btn add-details">Add Details</button>
+    <button type="button" class="btn emoji">&#128513;</button>
+  </div>
+</div>
