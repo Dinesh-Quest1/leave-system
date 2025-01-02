@@ -1,4 +1,4 @@
-import { Component, inject, Inject } from '@angular/core';
+import { Component, inject, Inject, OnInit } from '@angular/core';
 import { mockList } from '../../../constants/mockData';
 import { CommonModule, formatPercent, UpperCasePipe } from '@angular/common';
 import { PaginationComponent } from '../../../components/pagination/pagination.component';
@@ -8,6 +8,8 @@ import { MatPaginationComponent } from '../../../components/mat-pagination/mat-p
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../../components/modal/modal.component';
+import { Store } from '@ngrx/store';
+import { getUsers } from '../../../stores/app.selector';
 
 const columns = [
   {
@@ -78,9 +80,9 @@ const columns = [
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
 })
-export class UsersList {
+export class UsersList implements OnInit {
   displayedColumns: any[] = columns;
-  list: any[] = mockList;
+  list: any[] = [];
   totalPages = 5;
   currentPage = 1;
   pageSize = 5;
@@ -89,6 +91,8 @@ export class UsersList {
   deleteId: any;
 
   constructor(private router: Router) {}
+
+  store: Store = inject(Store);
 
   pageChange(page: number): void {
     this.currentPage = page;
@@ -105,5 +109,12 @@ export class UsersList {
       return;
     }
     action(element, this.router);
+  }
+
+  ngOnInit() {
+    this.store.select(getUsers).subscribe((value: any[]) => {
+      console.log({ users: value });
+      this.list = value;
+    });
   }
 }

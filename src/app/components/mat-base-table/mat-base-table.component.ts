@@ -63,6 +63,7 @@ export class MatBaseTableComponent implements OnInit {
 
   ngOnChanges() {
     if (this.tableData) {
+      console.log('changing table data', this.tableData);
       this.dataSource = new MatTableDataSource(this.tableData);
     }
     if (this.displayedColumns) {
