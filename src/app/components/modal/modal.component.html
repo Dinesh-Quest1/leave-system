@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Hi {{ title }}</h2>
+<mat-dialog-content>
+  <p>What's your favorite animal?</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="dismiss()">Cancel</button>
+  <button mat-button [mat-dialog-close]="confirm()" cdkFocusInitial>
+    Delete
+  </button>
+</mat-dialog-actions>

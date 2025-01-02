@@ -1,8 +1,8 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AppBarComponent } from './components/app-bar/app-bar.component';
 import { LayoutComponent } from './pages/layout/layout.component';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
