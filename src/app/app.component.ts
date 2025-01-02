@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { AppBarComponent } from './components/app-bar/app-bar.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 
@@ -13,4 +13,12 @@ import { LayoutComponent } from './pages/layout/layout.component';
 })
 export class AppComponent {
   title = 'user-leaves';
+
+  route: ActivatedRoute = inject(ActivatedRoute);
+  router: Router = inject(Router);
+
+  ngOnInit() {
+    const currentUrl = this.router.url;
+    console.log({ currentUrl });
+  }
 }
