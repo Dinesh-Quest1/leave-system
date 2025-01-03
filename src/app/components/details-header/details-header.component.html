@@ -4,10 +4,16 @@
     <p class="subheading">Primary Contact Info</p>
   </div>
   <div class="header-right">
-    <button class="save-btn" (click)="onSave.emit()">Save</button>
+    <button mat-flat-button color="primary" (click)="onSave.emit()">
+      Save
+    </button>
+    <button mat-flat-button color="warning" (click)="onApplyLeave.emit()">
+      Apply Leave
+    </button>
+
     <ng-container *ngIf="renderTemplate">
       <ng-template></ng-template>
     </ng-container>
-    <button class="cancel-btn">Cancel</button>
+    <button mat-flat-button (click)="onCancel.emit()">Cancel</button>
   </div>
 </div>

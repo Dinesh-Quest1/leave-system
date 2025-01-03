@@ -1,0 +1,11 @@
+.container {
+  flex-basis: 1;
+  min-width: 250px;
+  padding: 10px;
+  width: 25%;
+}
+
+.days {
+  display: flex;
+  align-items: center;
+}

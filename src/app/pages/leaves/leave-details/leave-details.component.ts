@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './leave-details.component.html',
-  styleUrl: './leave-details.component.scss'
+  styleUrl: './leave-details.component.scss',
 })
-export class LeaveDetailsComponent {
-
-}
+export class LeaveDetailsComponent {}

@@ -1,1 +1,8 @@
-<p>leaves works!</p>
+<list-header title="Leaves"></list-header>
+<div class="container">
+  <leave-card
+    *ngFor="let listItem of list"
+    [leaveDetail]="listItem"
+    [users]="users | groupArrayByKey : 'id'"
+  ></leave-card>
+</div>

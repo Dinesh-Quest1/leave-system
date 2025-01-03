@@ -1,5 +1,6 @@
 export const mockList: any[] = [
   {
+    id: 1,
     name: 'John Doe',
     phoneNumber: '9876543210',
     primaryAddress: '123 Main Street',
@@ -8,6 +9,7 @@ export const mockList: any[] = [
     status: true,
   },
   {
+    id: 2,
     name: 'Jane Smith',
     phoneNumber: '9123456789',
     primaryAddress: '45 Park Lane',
@@ -16,6 +18,7 @@ export const mockList: any[] = [
     status: false,
   },
   {
+    id: 3,
     name: 'Alice Johnson',
     phoneNumber: '8987654321',
     primaryAddress: '89 Oak Street',
@@ -24,6 +27,7 @@ export const mockList: any[] = [
     status: true,
   },
   {
+    id: 4,
     name: 'Robert Brown',
     phoneNumber: '9001234567',
     primaryAddress: '12 Maple Avenue',
@@ -32,6 +36,7 @@ export const mockList: any[] = [
     status: false,
   },
   {
+    id: 5,
     name: 'Emily Davis',
     phoneNumber: '8800234567',
     primaryAddress: '75 Birch Road',
@@ -40,6 +45,7 @@ export const mockList: any[] = [
     status: true,
   },
   {
+    id: 6,
     name: 'Michael Wilson',
     phoneNumber: '7009876543',
     primaryAddress: '34 Pine Street',
@@ -48,6 +54,7 @@ export const mockList: any[] = [
     status: true,
   },
   {
+    id: 7,
     name: 'Jessica Moore',
     phoneNumber: '7896541230',
     primaryAddress: '8 Cedar Lane',
@@ -56,6 +63,7 @@ export const mockList: any[] = [
     status: false,
   },
   {
+    id: 8,
     name: 'Daniel Taylor',
     phoneNumber: '7567894321',
     primaryAddress: '44 Elm Avenue',
@@ -64,6 +72,7 @@ export const mockList: any[] = [
     status: true,
   },
   {
+    id: 9,
     name: 'Sophia Anderson',
     phoneNumber: '7890123456',
     primaryAddress: '56 Willow Drive',
@@ -72,6 +81,7 @@ export const mockList: any[] = [
     status: false,
   },
   {
+    id: 10,
     name: 'James Thomas',
     phoneNumber: '8096543210',
     primaryAddress: '29 Magnolia Street',
@@ -80,6 +90,7 @@ export const mockList: any[] = [
     status: true,
   },
   {
+    id: 11,
     name: 'Isabella Martin',
     phoneNumber: '8567432190',
     primaryAddress: '18 Walnut Road',
@@ -88,6 +99,7 @@ export const mockList: any[] = [
     status: true,
   },
   {
+    id: 12,
     name: 'Oliver Lee',
     phoneNumber: '9654237810',
     primaryAddress: '14 Cherry Street',
@@ -96,6 +108,7 @@ export const mockList: any[] = [
     status: false,
   },
   {
+    id: 13,
     name: 'Mia Scott',
     phoneNumber: '8901245678',
     primaryAddress: '66 Ash Lane',
@@ -104,6 +117,7 @@ export const mockList: any[] = [
     status: true,
   },
   {
+    id: 14,
     name: 'Ethan Harris',
     phoneNumber: '7654321980',
     primaryAddress: '98 Beech Avenue',
@@ -112,6 +126,7 @@ export const mockList: any[] = [
     status: false,
   },
   {
+    id: 15,
     name: 'Charlotte White',
     phoneNumber: '8123456789',
     primaryAddress: '20 Ivy Lane',
@@ -120,6 +135,7 @@ export const mockList: any[] = [
     status: true,
   },
   {
+    id: 16,
     name: 'Aiden Hall',
     phoneNumber: '7890123345',
     primaryAddress: '72 Spruce Street',
@@ -128,6 +144,7 @@ export const mockList: any[] = [
     status: false,
   },
   {
+    id: 17,
     name: 'Amelia Young',
     phoneNumber: '7986543120',
     primaryAddress: '38 Sycamore Drive',
@@ -136,6 +153,7 @@ export const mockList: any[] = [
     status: true,
   },
   {
+    id: 18,
     name: 'Lucas King',
     phoneNumber: '8543217890',
     primaryAddress: '50 Hickory Street',
@@ -144,6 +162,7 @@ export const mockList: any[] = [
     status: true,
   },
   {
+    id: 19,
     name: 'Liam Wright',
     phoneNumber: '7609876543',
     primaryAddress: '15 Poplar Lane',
@@ -152,6 +171,7 @@ export const mockList: any[] = [
     status: false,
   },
   {
+    id: 20,
     name: 'Harper Green',
     phoneNumber: '7890543212',
     primaryAddress: '90 Linden Drive',
@@ -160,6 +180,7 @@ export const mockList: any[] = [
     status: true,
   },
   {
+    id: 21,
     name: 'Mason Allen',
     phoneNumber: '9098765432',
     primaryAddress: '64 Maple Lane',
@@ -168,6 +189,7 @@ export const mockList: any[] = [
     status: false,
   },
   {
+    id: 22,
     name: 'Ella Baker',
     phoneNumber: '7686543120',
     primaryAddress: '22 Palm Street',
@@ -176,6 +198,7 @@ export const mockList: any[] = [
     status: true,
   },
   {
+    id: 23,
     name: 'Henry Nelson',
     phoneNumber: '9876541230',
     primaryAddress: '47 Chestnut Road',
@@ -184,6 +207,7 @@ export const mockList: any[] = [
     status: false,
   },
   {
+    id: 24,
     name: 'Victoria Carter',
     phoneNumber: '8012345678',
     primaryAddress: '61 Magnolia Avenue',
@@ -192,6 +216,7 @@ export const mockList: any[] = [
     status: true,
   },
   {
+    id: 25,
     name: 'Benjamin Torres',
     phoneNumber: '7896540987',
     primaryAddress: '34 Rosewood Drive',
@@ -200,6 +225,7 @@ export const mockList: any[] = [
     status: true,
   },
   {
+    id: 26,
     name: 'Abigail Adams',
     phoneNumber: '8907654321',
     primaryAddress: '12 Oak Lane',
@@ -208,6 +234,7 @@ export const mockList: any[] = [
     status: false,
   },
   {
+    id: 27,
     name: 'William Phillips',
     phoneNumber: '7986123456',
     primaryAddress: '70 Elm Street',
@@ -216,6 +243,7 @@ export const mockList: any[] = [
     status: true,
   },
   {
+    id: 28,
     name: 'Evelyn Cooper',
     phoneNumber: '7650345678',
     primaryAddress: '48 Pine Lane',
@@ -224,6 +252,7 @@ export const mockList: any[] = [
     status: false,
   },
   {
+    id: 29,
     name: 'Logan Sanders',
     phoneNumber: '8987345621',
     primaryAddress: '86 Ash Avenue',
@@ -232,11 +261,50 @@ export const mockList: any[] = [
     status: true,
   },
   {
+    id: 30,
     name: 'Chloe Perry',
     phoneNumber: '7689345671',
     primaryAddress: '95 Hickory Lane',
     pincode: '500034',
     dateOfBirth: '1992-11-29',
     status: false,
+  },
+];
+
+export const leaves = [
+  {
+    userId: 1,
+    startDate: '2024-12-31',
+    endDate: '2025-01-01',
+    typeOfLeave: 'Sick',
+    comments: 'Health illness',
+  },
+  {
+    userId: 2,
+    startDate: '2024-12-31',
+    endDate: '2025-01-01',
+    typeOfLeave: 'Vacation',
+    comments: 'Family vacation',
+  },
+  {
+    userId: 1,
+    startDate: '2024-12-31',
+    endDate: '2025-01-01',
+    typeOfLeave: 'Sick',
+    comments: 'Health illness',
+  },
+  {
+    userId: 4,
+    startDate: '2024-12-31',
+    endDate: '2025-01-01',
+    typeOfLeave: 'Vacation',
+    comments: 'Family vacation',
+  },
+  {
+    userId: 5,
+    startDate: '2024-12-31',
+    endDate: '2025-01-01',
+    typeOfLeave: 'Sick',
+    comments: 'Health illness',
   },
 ];

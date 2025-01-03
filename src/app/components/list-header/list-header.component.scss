@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 20px;
+}
+h2,
+h4 {
+  margin: 0;
+}
