@@ -1,10 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
 import { addLeave, addUser, updateLeave, updateUser } from './app.action';
-import { mockList } from '../constants/mockData';
+import { leaves, mockList } from '../constants/mockData';
 
 export const initialState = {
   users: mockList,
-  leaves: [],
+  leaves: leaves,
 };
 
 export const AppReducer = createReducer(

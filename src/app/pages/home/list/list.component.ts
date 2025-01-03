@@ -92,15 +92,6 @@ export class UsersList implements OnInit {
 
   store: Store = inject(Store);
 
-  pageChange(page: number): void {
-    console.log(page);
-    this.currentPage = page;
-  }
-
-  pageSizeChange(pageSize: number): void {
-    this.currentPage = pageSize;
-  }
-
   handleRowAction({ action, element, actionType }: any): void {
     if (actionType === 'delete') {
       this.deleteId = element?.id;
