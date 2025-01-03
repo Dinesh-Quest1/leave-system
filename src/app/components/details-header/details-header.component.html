@@ -4,7 +4,7 @@
     <p class="subheading">Primary Contact Info</p>
   </div>
   <div class="header-right">
-    <button class="save-btn">Save</button>
+    <button class="save-btn" (click)="onSave.emit()">Save</button>
     <ng-container *ngIf="renderTemplate">
       <ng-template></ng-template>
     </ng-container>

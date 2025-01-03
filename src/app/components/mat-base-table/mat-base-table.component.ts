@@ -42,8 +42,13 @@ export class MatBaseTableComponent implements OnInit {
 
   headers: string[] = [];
 
-  onPaginationChange(pageData: any) {
-    console.log({ pageData });
+  onPaginationChange({ pageIndex, pageSize }: any) {
+    const dataToRender = this.tableData.slice(
+      pageIndex * pageSize,
+      pageSize * pageIndex + pageSize
+    );
+    console.log({ dataToRender, pageIndex, pageSize });
+    this.dataSource = new MatTableDataSource(dataToRender);
   }
   dataSource!: MatTableDataSource<any>;
 
@@ -57,14 +62,23 @@ export class MatBaseTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource(this.tableData);
+    const dataToRender = this.tableData.slice(
+      this.currentPage * this.pageSize,
+      this.pageSize * this.currentPage + this.pageSize
+    );
+    console.log({
+      dataToRender,
+      pageIndex: this.currentPage,
+      pageSize: this.pageSize,
+    });
+
+    this.dataSource = new MatTableDataSource(dataToRender);
     this.headers = this.displayedColumns.map((column: any) => column.header);
   }
 
   ngOnChanges() {
     if (this.tableData) {
-      console.log('changing table data', this.tableData);
-      this.dataSource = new MatTableDataSource(this.tableData);
+      console.log(this.dataSource);
     }
     if (this.displayedColumns) {
       this.headers = this.displayedColumns.map((column: any) => column.header);

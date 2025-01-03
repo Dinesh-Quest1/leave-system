@@ -1,24 +1,21 @@
-import { Component, inject, NgModule, OnInit } from '@angular/core';
-import { DetailsHeaderComponent } from '../../../components/details-header/details-header.component';
-import { BasicInfoComponent } from './basic-info/basic-info.component';
-import { PrimaryContactInfoComponent } from './primary-contact-info/primary-contact-info.component';
-import { SecondaryContactInfoComponent } from './secondary-contact-info/secondary-contact-info.component';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { getUsers } from '../../../stores/app.selector';
+import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { InputFieldComponent } from '../../../components/formFields/input-field/input-field.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { CommonModule } from '@angular/common';
-import { SwitchComponent } from '../../../components/switch/switch.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { DetailsHeaderComponent } from '../../../components/details-header/details-header.component';
+import { getUsers } from '../../../stores/app.selector';
+import { BasicInfoComponent } from './basic-info/basic-info.component';
+import { PrimaryContactInfoComponent } from './primary-contact-info/primary-contact-info.component';
+import { SecondaryContactInfoComponent } from './secondary-contact-info/secondary-contact-info.component';
 
 @Component({
   selector: 'user-details',
@@ -33,8 +30,6 @@ import { SwitchComponent } from '../../../components/switch/switch.component';
     FormsModule,
     MatInputModule,
     CommonModule,
-    InputFieldComponent,
-    SwitchComponent,
   ],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
@@ -51,33 +46,33 @@ export class UserDetails implements OnInit {
 
   constructor(formBuilder: FormBuilder) {
     this.userForm = formBuilder.group({
-      basicInfo: {
+      basicInfo: formBuilder.group({
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
         status: [false],
-      },
-      primaryContactInfo: {
+      }),
+      primaryContactInfo: formBuilder.group({
         address: [''],
         street: [''],
         city: [''],
         state: [''],
         pincode: [''],
-      },
-      secondaryContactInfo: {
+      }),
+      secondaryContactInfo: formBuilder.group({
         address: [''],
         street: [''],
         city: [''],
         state: [''],
         pincode: [''],
         usePrimaryContact: [false],
-      },
+      }),
     });
   }
 
   onSubmit(values: any) {
-    console.log(values);
+    console.log(this.userForm.value);
   }
 
   ngOnInit() {
