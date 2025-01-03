@@ -10,7 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { InputFieldComponent } from '../../../../components/formFields/input-field/input-field.component';
 import { TextFieldModule } from '@angular/cdk/text-field';
-import { SwitchComponent } from '../../../../components/switch/switch.component';
+import { SwitchComponent } from '../../../../components/formFields/switch/switch.component';
 
 @Component({
   selector: 'basic-info',
@@ -32,5 +32,7 @@ import { SwitchComponent } from '../../../../components/switch/switch.component'
 export class BasicInfoComponent {
   @Input() fromGroup!: any;
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log();
+  }
 }

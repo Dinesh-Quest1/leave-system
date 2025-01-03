@@ -1,14 +1,11 @@
-import { Component, inject, Inject, OnInit } from '@angular/core';
-import { mockList } from '../../../constants/mockData';
-import { CommonModule, formatPercent, UpperCasePipe } from '@angular/common';
-import { PaginationComponent } from '../../../components/pagination/pagination.component';
+import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { BaseTableComponent } from '../../../components/base-table/base-table.component';
 import { MatBaseTableComponent } from '../../../components/mat-base-table/mat-base-table.component';
 import { MatPaginationComponent } from '../../../components/mat-pagination/mat-pagination.component';
-import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../../components/modal/modal.component';
-import { Store } from '@ngrx/store';
 import { getUsers } from '../../../stores/app.selector';
 
 const columns = [

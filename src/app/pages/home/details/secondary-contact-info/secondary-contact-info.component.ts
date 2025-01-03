@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { TextFieldModule } from '@angular/cdk/text-field';
-import { CheckBoxComponent } from '../../../../components/check-box/check-box.component';
+import { CheckBoxComponent } from '../../../../components/formFields/check-box/check-box.component';
 
 @Component({
   selector: 'secondary-contact-info',
