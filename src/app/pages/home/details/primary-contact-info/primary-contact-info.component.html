@@ -1,1 +1,23 @@
-<p>primary-contact-info works!</p>
+<h4>Basic Info</h4>
+<div [formGroup]="fromGroup">
+  <input-field
+    [label]="'First Name'"
+    [name]="'firstName'"
+    [control]="fromGroup.get('firstName')"
+  ></input-field>
+  <input-field
+    [label]="'Last Name'"
+    [name]="'lastName'"
+    [control]="fromGroup.get('lastName')"
+  ></input-field>
+  <input-field
+    [label]="'Email'"
+    [name]="'email'"
+    [control]="fromGroup.get('email')"
+  ></input-field>
+  <input-field
+    [label]="'Phone Number'"
+    [name]="'phoneNumber'"
+    [control]="fromGroup.get('phoneNumber')"
+  ></input-field>
+</div>

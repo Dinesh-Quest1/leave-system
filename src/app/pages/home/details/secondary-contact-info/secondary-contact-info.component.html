@@ -1,1 +1,28 @@
-<p>secondary-contact-info works!</p>
+<h4>Secondary Contact Info</h4>
+<div [formGroup]="fromGroup">
+  <check-box
+    [label]="'Same as primary contact'"
+    [control]="fromGroup.get('usePrimaryContact')"
+    [name]="'usePrimaryContact'"
+  ></check-box>
+  <input-field
+    [label]="'First Name'"
+    [name]="'firstName'"
+    [control]="fromGroup.get('firstName')"
+  ></input-field>
+  <input-field
+    [label]="'Last Name'"
+    [name]="'lastName'"
+    [control]="fromGroup.get('lastName')"
+  ></input-field>
+  <input-field
+    [label]="'Email'"
+    [name]="'email'"
+    [control]="fromGroup.get('email')"
+  ></input-field>
+  <input-field
+    [label]="'Phone Number'"
+    [name]="'phoneNumber'"
+    [control]="fromGroup.get('phoneNumber')"
+  ></input-field>
+</div>

@@ -1,12 +1,18 @@
 <details-header></details-header>
-<div class="section-container">
-  <div class="section">
-    <basic-info [userForm]="userForm"></basic-info>
+<form [formGroup]="userForm">
+  <div class="section-container">
+    <div class="section">
+      <basic-info [fromGroup]="userForm.get('basicInfo')"></basic-info>
+    </div>
+    <div class="section">
+      <primary-contact-info
+        [fromGroup]="userForm.get('primaryContactInfo')"
+      ></primary-contact-info>
+    </div>
+    <div class="section">
+      <secondary-contact-info
+        [fromGroup]="userForm.get('secondaryContactInfo')"
+      ></secondary-contact-info>
+    </div>
   </div>
-  <div class="section">
-    <primary-contact-info [userForm]="userForm"></primary-contact-info>
-  </div>
-  <div class="section">
-    <secondary-contact-info [userForm]="userForm"></secondary-contact-info>
-  </div>
-</div>
+</form>

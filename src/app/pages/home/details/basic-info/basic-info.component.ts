@@ -1,9 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  AbstractControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { InputFieldComponent } from '../../../../components/formFields/input-field/input-field.component';
+import { TextFieldModule } from '@angular/cdk/text-field';
+import { SwitchComponent } from '../../../../components/switch/switch.component';
 
 @Component({
   selector: 'basic-info',
@@ -15,10 +22,15 @@ import { InputFieldComponent } from '../../../../components/formFields/input-fie
     FormsModule,
     MatInputModule,
     CommonModule,
+    TextFieldModule,
+    InputFieldComponent,
+    SwitchComponent,
   ],
   templateUrl: './basic-info.component.html',
   styleUrl: './basic-info.component.scss',
 })
 export class BasicInfoComponent {
-  @Input() userForm: any;
+  @Input() fromGroup!: any;
+
+  ngOnInit() {}
 }

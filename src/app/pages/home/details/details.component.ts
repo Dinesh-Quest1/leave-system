@@ -7,15 +7,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { getUsers } from '../../../stores/app.selector';
 import {
+  FormBuilder,
   FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { InputFieldComponent } from '../../../components/formFields/input-field/input-field.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
+import { SwitchComponent } from '../../../components/switch/switch.component';
 
 @Component({
   selector: 'user-details',
@@ -25,12 +28,13 @@ import { CommonModule } from '@angular/common';
     BasicInfoComponent,
     PrimaryContactInfoComponent,
     SecondaryContactInfoComponent,
-    InputFieldComponent,
     ReactiveFormsModule,
     MatFormFieldModule,
     FormsModule,
     MatInputModule,
     CommonModule,
+    InputFieldComponent,
+    SwitchComponent,
   ],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
@@ -45,10 +49,30 @@ export class UserDetails implements OnInit {
 
   userForm: FormGroup;
 
-  constructor() {
-    this.userForm = new FormGroup({
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
+  constructor(formBuilder: FormBuilder) {
+    this.userForm = formBuilder.group({
+      basicInfo: {
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
+        status: [false],
+      },
+      primaryContactInfo: {
+        address: [''],
+        street: [''],
+        city: [''],
+        state: [''],
+        pincode: [''],
+      },
+      secondaryContactInfo: {
+        address: [''],
+        street: [''],
+        city: [''],
+        state: [''],
+        pincode: [''],
+        usePrimaryContact: [false],
+      },
     });
   }
 
