@@ -83,11 +83,9 @@ const columns = [
 export class UsersList implements OnInit {
   displayedColumns: any[] = columns;
   list: any[] = [];
-  totalPages = 5;
-  currentPage = 1;
+  currentPage = 0;
   pageSize = 5;
   columns: any[] = columns;
-  length: number = 100;
   deleteId: any;
 
   constructor(private router: Router) {}
@@ -95,6 +93,7 @@ export class UsersList implements OnInit {
   store: Store = inject(Store);
 
   pageChange(page: number): void {
+    console.log(page);
     this.currentPage = page;
   }
 

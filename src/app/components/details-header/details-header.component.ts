@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'details-header',
@@ -10,4 +10,5 @@ import { Component, Input } from '@angular/core';
 })
 export class DetailsHeaderComponent {
   @Input() renderTemplate: any = null;
+  @Output() onSave: EventEmitter<any> = new EventEmitter();
 }

@@ -1,13 +1,28 @@
 <h4>Basic Info</h4>
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit($event)">
+<div [formGroup]="fromGroup">
   <input-field
     [label]="'First Name'"
     [name]="'firstName'"
-    [value]=""
+    [control]="fromGroup.get('firstName')"
+  />
+  <input-field
+    [label]="'Last Name'"
+    [name]="'lastName'"
+    [control]="fromGroup.get('lastName')"
   ></input-field>
   <input-field
-    [label]="'lastName'"
-    [name]="'lastName'"
-    [value]=""
+    [label]="'Email'"
+    [name]="'email'"
+    [control]="fromGroup.get('email')"
   ></input-field>
-</form>
+  <input-field
+    [label]="'Phone Number'"
+    [name]="'phoneNumber'"
+    [control]="fromGroup.get('phoneNumber')"
+  ></input-field>
+  <switch
+    [label]="'Status'"
+    [control]="fromGroup.get('status')"
+    [name]="'status'"
+  ></switch>
+</div>

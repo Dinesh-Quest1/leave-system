@@ -5,6 +5,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
 import { provideStore } from '@ngrx/store';
 import { AppReducer } from './stores/app.reducer';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,5 +13,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimations(),
     provideStore({ app: AppReducer }),
+    provideAnimationsAsync(),
+    provideAnimationsAsync(),
   ],
 };

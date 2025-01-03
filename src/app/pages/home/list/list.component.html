@@ -1,13 +1,7 @@
-<!-- <base-table
-  [list]="list"
-  [totalPages]="totalPages"
-  [currentPage]="currentPage"
-  [columns]="columns"
-></base-table> -->
 <mat-base-table
   [tableData]="list"
   [displayedColumns]="displayedColumns"
-  [length]="length"
+  [length]="list.length"
   [pageSize]="pageSize"
   [currentPage]="currentPage"
   (handleRowAction)="handleRowAction($event)"
