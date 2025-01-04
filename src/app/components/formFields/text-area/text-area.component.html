@@ -1,9 +1,8 @@
 <mat-form-field class="example-full-width">
-  <mat-label>{{ label }}</mat-label>
-  <input
-    [type]="type"
+  <mat-label>Address</mat-label>
+  <textarea
     matInput
-    [formControl]="control"
     [placeholder]="placeholder || label"
-  />
+    [formControl]="control"
+  ></textarea>
 </mat-form-field>

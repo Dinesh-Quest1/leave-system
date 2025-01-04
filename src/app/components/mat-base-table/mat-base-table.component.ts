@@ -7,11 +7,13 @@ import {
   Input,
   OnInit,
   Output,
+  SimpleChanges,
 } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginationComponent } from '../mat-pagination/mat-pagination.component';
 import { ModalComponent } from '../modal/modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'mat-base-table',
@@ -21,6 +23,7 @@ import { MatDialog } from '@angular/material/dialog';
     CommonModule,
     MatPaginationComponent,
     ModalComponent,
+    MatIconModule,
   ],
   templateUrl: './mat-base-table.component.html',
   styleUrl: './mat-base-table.component.scss',
@@ -66,19 +69,18 @@ export class MatBaseTableComponent implements OnInit {
       this.currentPage * this.pageSize,
       this.pageSize * this.currentPage + this.pageSize
     );
-    console.log({
-      dataToRender,
-      pageIndex: this.currentPage,
-      pageSize: this.pageSize,
-    });
 
     this.dataSource = new MatTableDataSource(dataToRender);
     this.headers = this.displayedColumns.map((column: any) => column.header);
   }
 
-  ngOnChanges() {
-    if (this.tableData) {
-      console.log(this.dataSource);
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['tableData']) {
+      const dataToRender = this.tableData.slice(
+        this.currentPage * this.pageSize,
+        this.pageSize * this.currentPage + this.pageSize
+      );
+      this.dataSource = new MatTableDataSource(dataToRender);
     }
     if (this.displayedColumns) {
       this.headers = this.displayedColumns.map((column: any) => column.header);

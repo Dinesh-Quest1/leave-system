@@ -1,41 +1,44 @@
-import { Component, inject, Inject, OnInit } from '@angular/core';
-import { mockList } from '../../../constants/mockData';
-import { CommonModule, formatPercent, UpperCasePipe } from '@angular/common';
-import { PaginationComponent } from '../../../components/pagination/pagination.component';
+import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { BaseTableComponent } from '../../../components/base-table/base-table.component';
 import { MatBaseTableComponent } from '../../../components/mat-base-table/mat-base-table.component';
 import { MatPaginationComponent } from '../../../components/mat-pagination/mat-pagination.component';
-import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../../components/modal/modal.component';
-import { Store } from '@ngrx/store';
 import { getUsers } from '../../../stores/app.selector';
+import { ApiService } from '../../../services/api.service';
+import { API_PATHS } from '../../../constants/apiPaths';
+import { addUser, loadUser } from '../../../stores/app.action';
 
 const columns = [
   {
     header: 'Name',
-    field: 'name',
+    field: 'basicInfo',
+    format: (data: any) => {
+      console.log(data);
+      return data?.firstName + ' ' + data?.lastName || '';
+    },
   },
   {
     header: 'Phone Number',
-    field: 'phoneNumber',
+    field: 'basicInfo',
+    format: (data: any) => data?.phoneNumber || '',
   },
   {
     header: 'Primary Address',
-    field: 'primaryAddress',
+    field: 'primaryContactInfo',
+    format: (data: any) => data?.address || '',
   },
   {
     header: 'Pincode',
-    field: 'pincode',
-  },
-  {
-    header: 'Date of Birth',
-    field: 'dateOfBirth',
+    field: 'primaryContactInfo',
+    format: (data: any) => data?.pincode || '',
   },
   {
     header: 'Status',
-    field: 'status',
-    format: (data: any) => (data ? 'Active' : 'Inactive'),
+    field: 'primaryContactInfo',
+    format: (data: any) => (data?.status ? 'Active' : 'Inactive'),
   },
   {
     header: 'Actions',
@@ -44,6 +47,7 @@ const columns = [
       {
         header: 'edit',
         icon: 'edit',
+        iconColor: 'primary',
         label: 'Edit',
         action: (item: any, router: Router) => {
           router.navigateByUrl('/users/details?action=edit&user=' + item?.id);
@@ -51,7 +55,8 @@ const columns = [
       },
       {
         header: 'view',
-        icon: 'view',
+        icon: 'visibility',
+        iconColor: 'accent',
         label: 'View',
         action: (item: any, router: Router) => {
           router.navigateByUrl('/users/details?action=view&user=' + item?.id);
@@ -60,6 +65,8 @@ const columns = [
       {
         header: 'delete',
         icon: 'delete',
+        iconColor: 'warn',
+
         label: 'Delete',
         action: (item: any) => console.log('Delete clicked', item),
       },
@@ -70,15 +77,10 @@ const columns = [
 @Component({
   selector: 'users-list',
   standalone: true,
-  imports: [
-    CommonModule,
-    BaseTableComponent,
-    MatBaseTableComponent,
-    MatPaginationComponent,
-    ModalComponent,
-  ],
+  imports: [CommonModule, MatBaseTableComponent],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
+  providers: [ApiService],
 })
 export class UsersList implements OnInit {
   displayedColumns: any[] = columns;
@@ -88,9 +90,11 @@ export class UsersList implements OnInit {
   columns: any[] = columns;
   deleteId: any;
 
-  constructor(private router: Router) {}
-
-  store: Store = inject(Store);
+  constructor(
+    private readonly router: Router,
+    private readonly store: Store,
+    private readonly apiService: ApiService
+  ) {}
 
   handleRowAction({ action, element, actionType }: any): void {
     if (actionType === 'delete') {
@@ -102,6 +106,10 @@ export class UsersList implements OnInit {
   }
 
   ngOnInit() {
+    this.apiService.getAll(API_PATHS.USERS).subscribe((value: any) => {
+      this.store.dispatch(loadUser({ value }));
+    });
+
     this.store.select(getUsers).subscribe((value: any[]) => {
       this.list = value;
     });

@@ -1,16 +1,29 @@
 import { createReducer, on } from '@ngrx/store';
-import { addLeave, addUser, updateLeave, updateUser } from './app.action';
+import {
+  addLeave,
+  addUser,
+  loadLeave,
+  loadUser,
+  updateLeave,
+  updateUser,
+} from './app.action';
 import { leaves, mockList } from '../constants/mockData';
 
 export const initialState = {
-  users: mockList,
+  users: [],
   leaves: leaves,
 };
 
 export const AppReducer = createReducer(
   initialState,
+  on(loadUser, (state: any, action: any) => {
+    return { ...state, users: action.value || [] };
+  }),
   on(addUser, (state: any, action: any) => {
     return { ...state, users: [...state.users, action.value] };
+  }),
+  on(loadLeave, (state: any, action: any) => {
+    return { ...state, leaves: action.value };
   }),
   on(addLeave, (state: any, action: any) => {
     return { ...state, leaves: [...state.leaves, action.value] };
