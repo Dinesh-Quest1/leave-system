@@ -90,11 +90,7 @@ export class UsersList implements OnInit {
   columns: any[] = columns;
   deleteId: any;
 
-  constructor(
-    private readonly router: Router,
-    private readonly store: Store,
-    private readonly apiService: ApiService
-  ) {}
+  constructor(private readonly router: Router, private readonly store: Store) {}
 
   handleRowAction({ action, element, actionType }: any): void {
     if (actionType === 'delete') {
@@ -106,10 +102,6 @@ export class UsersList implements OnInit {
   }
 
   ngOnInit() {
-    this.apiService.getAll(API_PATHS.USERS).subscribe((value: any) => {
-      this.store.dispatch(loadUser({ value }));
-    });
-
     this.store.select(getUsers).subscribe((value: any[]) => {
       this.list = value;
     });

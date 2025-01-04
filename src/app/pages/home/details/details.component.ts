@@ -16,6 +16,8 @@ import { getUsers } from '../../../stores/app.selector';
 import { BasicInfoComponent } from './basic-info/basic-info.component';
 import { PrimaryContactInfoComponent } from './primary-contact-info/primary-contact-info.component';
 import { SecondaryContactInfoComponent } from './secondary-contact-info/secondary-contact-info.component';
+import { Api } from './api.service';
+import { User } from '../../../models/User';
 
 @Component({
   selector: 'user-details',
@@ -37,8 +39,10 @@ import { SecondaryContactInfoComponent } from './secondary-contact-info/secondar
 export class UserDetails implements OnInit {
   route: ActivatedRoute = inject(ActivatedRoute);
   router: Router = inject(Router);
+  usersList: User[];
 
   store: Store = inject(Store);
+  apiService: Api = inject(Api);
 
   currentUser: any;
 
@@ -72,18 +76,34 @@ export class UserDetails implements OnInit {
   }
 
   onSubmit(values: any) {
-    console.log(this.userForm.value);
+    const payload = this.currentUser
+      ? this.userForm.value
+      : { ...this.userForm.value, id: this.usersList.length + 1 };
+    this.apiService.createUser(payload).subscribe((response) => {
+      this.apiService.fetchUsers();
+      this.router.navigate(['/users']);
+    });
+  }
+
+  onCancel() {
+    this.router.navigate(['/users']);
+  }
+
+  applyLeave() {
+    this.router.navigateByUrl(
+      '/leaves/details' + '?user=' + this.currentUser.id
+    );
   }
 
   ngOnInit() {
-    const userId = this.route.snapshot.paramMap.get('user');
+    const userId = this.route.snapshot.queryParams?.['user'];
 
-    if (userId) {
-      this.store
-        .select(getUsers)
-        .subscribe(
-          (users) => (this.currentUser = users.find((u) => u.id === userId))
-        );
-    }
+    this.store.select(getUsers).subscribe((users) => {
+      this.usersList = users;
+      if (userId) {
+        const editUser = users.find((u) => u.id === parseInt(userId));
+        this.currentUser = this.userForm.patchValue(editUser);
+      }
+    });
   }
 }

@@ -1,4 +1,16 @@
-<details-header (onSave)="onSubmit($event)"></details-header>
+<details-header
+  (onSave)="onSubmit($event)"
+  [title]="
+    currentUser
+      ? currentUser?.basicInfo?.firstName +
+        ' ' +
+        currentUser?.basicInfo?.lastName
+      : 'New User'
+  "
+  [disableLeave]="!currentUser"
+  (onCancel)="onCancel()"
+  (onApplyLeave)="applyLeave()"
+></details-header>
 <form [formGroup]="userForm">
   <div class="section-container">
     <div class="section">
@@ -9,6 +21,7 @@
         [fromGroup]="userForm.get('primaryContactInfo')"
       ></primary-contact-info>
     </div>
+
     <div class="section">
       <secondary-contact-info
         [fromGroup]="userForm.get('secondaryContactInfo')"
