@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink, RouterModule } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-bar',
@@ -14,6 +14,8 @@ export class AppBarComponent {
     { name: 'Home', navigateTo: '/users' },
     { name: 'Leaves', navigateTo: '/leaves' },
   ];
+
+  router: Router = inject(Router);
 
   onClick(item: { name: string; navigateTo: string }) {
     console.log(item.name);
