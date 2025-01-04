@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { CheckBoxComponent } from '../../../../components/formFields/check-box/check-box.component';
+import { TextAreaComponent } from '../../../../components/formFields/text-area/text-area.component';
 
 @Component({
   selector: 'secondary-contact-info',
@@ -20,6 +21,7 @@ import { CheckBoxComponent } from '../../../../components/formFields/check-box/c
     TextFieldModule,
     InputFieldComponent,
     CheckBoxComponent,
+    TextAreaComponent,
   ],
   templateUrl: './secondary-contact-info.component.html',
   styleUrl: './secondary-contact-info.component.scss',

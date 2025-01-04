@@ -1,9 +1,10 @@
 .section-container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding-inline: 1rem;
   gap: 1.5rem;
+  padding-top: 1rem;
 }
 .section {
   flex-grow: 1;
