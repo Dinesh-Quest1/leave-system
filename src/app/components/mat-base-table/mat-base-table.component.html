@@ -13,13 +13,24 @@
           {{ column.format(element[column.field]) }}
         </ng-container>
         <ng-container *ngIf="column.actions">
-          <button
-            *ngFor="let action of column.actions"
-            mat-button
-            (click)="handleAction(action.action, element, action.header)"
-          >
-            {{ action.label }}
-          </button>
+          <ng-container *ngFor="let action of column.actions" mat-button>
+            <ng-container *ngIf="action.icon">
+              <mat-icon
+                class="actionIcon"
+                [fontIcon]="action.icon"
+                [color]="action.iconColor"
+                (click)="handleAction(action.action, element, action.header)"
+              ></mat-icon>
+            </ng-container>
+            <ng-container *ngIf="!action.icon">
+              <button
+                (click)="handleAction(action.action, element, action.header)"
+                type="button"
+              >
+                {{ action.label }}
+              </button>
+            </ng-container>
+          </ng-container>
         </ng-container>
       </td>
     </ng-container>
