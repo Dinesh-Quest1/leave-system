@@ -1,0 +1,24 @@
+<mat-form-field class="example-full-width">
+  <mat-label>{{ label }}</mat-label>
+  <input
+    #input
+    type="text"
+    placeholder="Pick one"
+    matInput
+    [formControl]="control"
+    [matAutocomplete]="auto"
+    (input)="filter()"
+    (focus)="filter()"
+  />
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    [displayWith]="getOptionValue.bind(this)"
+  >
+    @for (option of filteredOptions; track option) {
+    <mat-option
+      [value]="option"
+      >{{ renderOption ? renderOption(option) : displayWith ? option?.[displayWith] : option }}</mat-option
+    >
+    }
+  </mat-autocomplete>
+</mat-form-field>
