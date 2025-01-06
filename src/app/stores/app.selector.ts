@@ -13,3 +13,8 @@ export const getLeaves = createSelector(
   appStore,
   (state): Leave[] => state?.leaves
 );
+
+export const getLoadingState = createSelector(
+  appStore,
+  (state): boolean => state.loading
+);

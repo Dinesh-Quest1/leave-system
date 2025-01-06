@@ -18,6 +18,7 @@ import { ApiService } from '../../../services/api.service';
 import { getUsers } from '../../../stores/app.selector';
 import { Api } from '../details/api.service';
 import { StatusComponent } from '../status/status.component';
+import { startLoader } from '../../../stores/app.action';
 
 const columns = [
   {
@@ -112,8 +113,7 @@ export class UsersList implements OnInit, AfterViewInit {
   statusControl = new FormControl('');
 
   onValueChange(user: User, value: boolean): void {
-    //loader
-    console.log({ user, value });
+    this.store.dispatch(startLoader());
     this.apiService
       .updateUser(
         { ...user, basicInfo: { ...user.basicInfo, status: value } },

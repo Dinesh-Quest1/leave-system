@@ -4,6 +4,8 @@ import {
   addUser,
   loadLeave,
   loadUser,
+  startLoader,
+  stopLoader,
   updateLeave,
   updateUser,
 } from './app.action';
@@ -11,6 +13,7 @@ import {
 export const initialState = {
   users: [],
   leaves: [],
+  loading: false,
 };
 
 export const AppReducer = createReducer(
@@ -32,5 +35,11 @@ export const AppReducer = createReducer(
   }),
   on(updateLeave, (state, action: any) => {
     return { ...state };
+  }),
+  on(startLoader, (state) => {
+    return { ...state, loading: true };
+  }),
+  on(stopLoader, (state) => {
+    return { ...state, loading: false };
   })
 );
