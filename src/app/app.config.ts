@@ -16,6 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideStore({ app: AppReducer }),
     provideAnimationsAsync(),
     provideAnimationsAsync(),
-    provideHttpClient(), provideAnimationsAsync(),
+    provideHttpClient(),
+    provideAnimationsAsync(),
   ],
 };

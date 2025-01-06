@@ -1,4 +1,10 @@
-import { Component, Input } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -21,4 +27,6 @@ export class SwitchComponent {
   @Input() label: string = '';
   @Input() control: any = null;
   @Input() name: string = '';
+  @Input() checked: boolean = false;
+  @Output() onValueChange: EventEmitter<any> = new EventEmitter();
 }

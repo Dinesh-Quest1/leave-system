@@ -6,29 +6,37 @@
     >
       <th mat-header-cell *matHeaderCellDef>{{ column.header }}</th>
       <td mat-cell *matCellDef="let element">
-        <ng-container *ngIf="!column.actions && !column.format">
-          {{ element[column.field] }}
+        <ng-container *ngIf="column.template">
+          <ng-container
+            *ngTemplateOutlet="column.template; context: { $implicit: element }"
+          ></ng-container>
         </ng-container>
-        <ng-container *ngIf="column.format">
-          {{ column.format(element[column.field]) }}
-        </ng-container>
-        <ng-container *ngIf="column.actions">
-          <ng-container *ngFor="let action of column.actions" mat-button>
-            <ng-container *ngIf="action.icon">
-              <mat-icon
-                class="actionIcon"
-                [fontIcon]="action.icon"
-                [color]="action.iconColor"
-                (click)="handleAction(action.action, element, action.header)"
-              ></mat-icon>
-            </ng-container>
-            <ng-container *ngIf="!action.icon">
-              <button
-                (click)="handleAction(action.action, element, action.header)"
-                type="button"
-              >
-                {{ action.label }}
-              </button>
+
+        <ng-container *ngIf="!column.template">
+          <ng-container *ngIf="!column.actions && !column.format">
+            {{ element[column.field] }}
+          </ng-container>
+          <ng-container *ngIf="column.format">
+            {{ column.format(element[column.field]) }}
+          </ng-container>
+          <ng-container *ngIf="column.actions">
+            <ng-container *ngFor="let action of column.actions" mat-button>
+              <ng-container *ngIf="action.icon">
+                <mat-icon
+                  class="actionIcon"
+                  [fontIcon]="action.icon"
+                  [color]="action.iconColor"
+                  (click)="handleAction(action.action, element, action.header)"
+                ></mat-icon>
+              </ng-container>
+              <ng-container *ngIf="!action.icon">
+                <button
+                  (click)="handleAction(action.action, element, action.header)"
+                  type="button"
+                >
+                  {{ action.label }}
+                </button>
+              </ng-container>
             </ng-container>
           </ng-container>
         </ng-container>
