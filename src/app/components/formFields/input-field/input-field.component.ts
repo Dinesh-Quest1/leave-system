@@ -27,7 +27,7 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class InputFieldComponent implements OnChanges, OnInit {
   @Input() label: string = 'Name';
-  @Input() control: FormControl | null = null;
+  @Input() control: any = null;
   @Input() name: string = 'name';
   @Input() placeholder: string = 'Name';
   @Input() type: string = 'text';

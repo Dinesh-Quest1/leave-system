@@ -1,10 +1,15 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { User } from '../models/User';
+import { Leave } from '../models/Leave';
 
 const appStore = createFeatureSelector<any>('app');
 
-export const getUsers = createSelector(appStore, (state): any[] => state.users);
+export const getUsers = createSelector(
+  appStore,
+  (state): User[] => state.users
+);
 
 export const getLeaves = createSelector(
   appStore,
-  (state): any[] => state?.leaves
+  (state): Leave[] => state?.leaves
 );

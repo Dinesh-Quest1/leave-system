@@ -22,10 +22,8 @@ import { Leave } from '../../../models/Leave';
   styleUrl: './leaves.component.scss',
 })
 export class LeavesComponent {
-  constructor(private router: Router) {}
-
-  list: any[];
-  users: any[];
+  list: any[] = [];
+  users: any[] = [];
   filteredList: Leave[] = [];
 
   selectedUser: User = null;
@@ -37,15 +35,15 @@ export class LeavesComponent {
       return;
     }
     this.selectedUser = user;
-
     this.filteredList = this.list.filter(
-      (user) => user.id === this.selectedUser?.id
+      (user) => user.userId === this.selectedUser?.id
     );
   }
 
   store: Store = inject(Store);
 
   ngOnInit() {
+    console.log(this.list);
     this.store.select(getLeaves).subscribe((value: any[]) => {
       this.list = value;
       this.filteredList = value;

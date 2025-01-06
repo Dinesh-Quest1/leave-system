@@ -7,11 +7,10 @@ import {
   updateLeave,
   updateUser,
 } from './app.action';
-import { leaves, mockList } from '../constants/mockData';
 
 export const initialState = {
   users: [],
-  leaves: leaves,
+  leaves: [],
 };
 
 export const AppReducer = createReducer(
