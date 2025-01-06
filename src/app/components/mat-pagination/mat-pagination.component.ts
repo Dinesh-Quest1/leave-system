@@ -35,13 +35,4 @@ export class MatPaginationComponent {
   changePage(page: number) {
     this.onPageChange.emit(+page);
   }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['currentPage']) {
-      console.log('Input changed to:', changes['currentPage'].currentValue);
-    }
-    if (changes['currentPage']) {
-      this.onPageChange.emit(this.currentPage);
-    }
-  }
 }

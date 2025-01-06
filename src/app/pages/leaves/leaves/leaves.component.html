@@ -1,7 +1,11 @@
-<list-header title="Leaves"></list-header>
+<list-header
+  title="Leaves"
+  [options]="users"
+  (onUserSelect)="onSelectedUser($event)"
+></list-header>
 <div class="container">
   <leave-card
-    *ngFor="let listItem of list"
+    *ngFor="let listItem of filteredList"
     [leaveDetail]="listItem"
     [users]="users | groupArrayByKey : 'id'"
   ></leave-card>

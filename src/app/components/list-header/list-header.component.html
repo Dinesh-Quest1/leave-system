@@ -2,5 +2,11 @@
   <h2>{{ title }}</h2>
   <div>
     <h4>Users</h4>
+    <auto-complete
+      [options]="options"
+      [control]="userFilter"
+      label="User"
+      [renderOption]="renderOption"
+    ></auto-complete>
   </div>
 </div>
