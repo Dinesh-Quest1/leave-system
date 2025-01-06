@@ -10,6 +10,8 @@
   [disableLeave]="!currentUser"
   (onCancel)="onCancel()"
   (onApplyLeave)="applyLeave()"
+  [enableApplyLeave]="true"
+  [header]="currentUser ? 'Update User' : 'Create User'"
 ></details-header>
 <form [formGroup]="userForm">
   <div class="section-container">

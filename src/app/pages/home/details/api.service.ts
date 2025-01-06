@@ -16,7 +16,21 @@ export class Api {
   ) {}
 
   createUser(user: User): Observable<User> {
-    return this.apiService.post(API_PATHS.USERS, user);
+    const response = this.apiService.post(API_PATHS.USERS, user);
+    this.fetchUsers();
+    return response;
+  }
+
+  updateUser(user: User, id: number): Observable<User> {
+    const response = this.apiService.put(`${API_PATHS.USERS}`, id, user);
+    this.fetchUsers();
+    return response;
+  }
+
+  deleteUser(id: number): Observable<any> {
+    const response = this.apiService.delete(`${API_PATHS.USERS}`, id);
+    this.fetchUsers();
+    return response;
   }
 
   fetchUsers(): void {

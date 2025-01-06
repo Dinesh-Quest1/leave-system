@@ -1,10 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, output, Output } from '@angular/core';
+import { AutoCompleteComponent } from '../formFields/auto-complete/auto-complete.component';
+import { FormControl } from '@angular/forms';
+import { User } from '../../models/User';
 
 @Component({
   selector: 'list-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AutoCompleteComponent],
   templateUrl: './list-header.component.html',
   styleUrl: './list-header.component.scss',
 })
@@ -15,4 +18,19 @@ export class ListHeaderComponent {
   @Output() onSave: EventEmitter<any> = new EventEmitter();
   @Output() onCancel: EventEmitter<any> = new EventEmitter();
   @Output() onApplyLeave: EventEmitter<any> = new EventEmitter();
+  @Input() options: User[] = [];
+  @Output() onUserSelect: EventEmitter<any> = new EventEmitter();
+
+  userFilter: FormControl = new FormControl('');
+
+  renderOption = (option: User): string => {
+    return option.basicInfo.firstName + ' ' + option.basicInfo.lastName || '';
+  };
+
+  ngOnInit(): void {
+    this.userFilter.valueChanges.subscribe((value) => {
+      console.log(value);
+      this.onUserSelect.emit(value);
+    });
+  }
 }

@@ -25,4 +25,8 @@ export class ApiService {
   put(apiPath: string, id: string | number, data: any): Observable<any> {
     return this.http.put(`${this.BASE_URL}/${apiPath}/${id}`, data);
   }
+
+  delete(apiPath: string, id: string | number): Observable<any> {
+    return this.http.delete(`${this.BASE_URL}/${apiPath}/${id}`);
+  }
 }

@@ -1,1 +1,32 @@
-<p>leave-details works!</p>
+<details-header
+  (onSave)="onSubmit($event)"
+  [title]="
+    currentUser?.basicInfo?.firstName + ' ' + currentUser?.basicInfo?.lastName
+  "
+  [disableLeave]="!currentUser"
+  (onCancel)="onCancel()"
+  header="Leave Form"
+></details-header>
+<form [formGroup]="leaveForm">
+  <input-field
+    [name]="'typeOfLeave'"
+    [label]="'Type of leave'"
+    [control]="leaveForm.get('typeOfLeave')"
+  >
+  </input-field>
+  <text-area
+    [name]="'comments'"
+    [label]="'Comments'"
+    [control]="leaveForm.get('comments')"
+  ></text-area>
+  <date-field
+    [name]="'startDate'"
+    [label]="'Start Date'"
+    [control]="leaveForm.get('startDate')"
+  ></date-field>
+  <date-field
+    [name]="'endDate'"
+    [label]="'End Date'"
+    [control]="leaveForm.get('endDate')"
+  ></date-field>
+</form>

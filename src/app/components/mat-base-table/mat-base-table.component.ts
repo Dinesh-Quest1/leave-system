@@ -50,7 +50,6 @@ export class MatBaseTableComponent implements OnInit {
       pageIndex * pageSize,
       pageSize * pageIndex + pageSize
     );
-    console.log({ dataToRender, pageIndex, pageSize });
     this.dataSource = new MatTableDataSource(dataToRender);
   }
   dataSource!: MatTableDataSource<any>;
@@ -61,7 +60,6 @@ export class MatBaseTableComponent implements OnInit {
       return;
     }
     this.handleRowAction.emit({ action, element, actionType });
-    console.log({ action, element });
   }
 
   ngOnInit() {

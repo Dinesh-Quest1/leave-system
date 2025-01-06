@@ -13,8 +13,4 @@ import { ConvertDaysPipe } from '../../pipes/convert-days.pipe';
 export class CardComponent {
   @Input() leaveDetail: any;
   @Input() users: any;
-
-  ngOnInit() {
-    console.log(this.leaveDetail);
-  }
 }

@@ -76,13 +76,28 @@ export class UserDetails implements OnInit {
   }
 
   onSubmit(values: any) {
-    const payload = this.currentUser
-      ? this.userForm.value
-      : { ...this.userForm.value, id: this.usersList.length + 1 };
-    this.apiService.createUser(payload).subscribe((response) => {
-      this.apiService.fetchUsers();
-      this.router.navigate(['/users']);
-    });
+    if (this.currentUser) this.updateUser();
+    else this.createUser();
+  }
+
+  createUser() {
+    this.apiService
+      .createUser({ ...this.userForm.value, id: this.usersList.length + 1 })
+      .subscribe((response) => {
+        this.router.navigate(['/users']);
+      });
+  }
+
+  updateUser() {
+    console.log(typeof this.currentUser.id.toString());
+    this.apiService
+      .updateUser(
+        { ...this.userForm.value, id: this.currentUser.id },
+        this.currentUser.id.toString()
+      )
+      .subscribe((response) => {
+        this.router.navigate(['/users']);
+      });
   }
 
   onCancel() {
@@ -101,8 +116,9 @@ export class UserDetails implements OnInit {
     this.store.select(getUsers).subscribe((users) => {
       this.usersList = users;
       if (userId) {
-        const editUser = users.find((u) => u.id === parseInt(userId));
-        this.currentUser = this.userForm.patchValue(editUser);
+        const editUser = users.find((u) => u.id === userId);
+        this.currentUser = editUser;
+        this.userForm.patchValue(editUser);
       }
     });
   }

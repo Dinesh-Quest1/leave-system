@@ -41,11 +41,6 @@ export class ModalComponent {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['title']) {
-      console.log('Input changed to:', changes['title'].currentValue);
-
-      if (changes['title'].currentValue) {
-        // this.openDialog();
-      }
       if (!changes['title'].currentValue) {
         this.dialogRef.close();
       }
