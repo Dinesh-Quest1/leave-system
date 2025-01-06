@@ -110,6 +110,7 @@ export class UsersList implements OnInit, AfterViewInit {
   statusControl = new FormControl('');
 
   onValueChange(user: User, value: boolean): void {
+    //loader
     this.apiService
       .updateUser(
         { ...user, basicInfo: { ...user.basicInfo, status: value } },
@@ -143,6 +144,12 @@ export class UsersList implements OnInit, AfterViewInit {
         };
       }
       return column;
+    });
+  }
+
+  deleteUser(user: any): void {
+    this.apiService.deleteUser(user?.id).subscribe((response: any) => {
+      this.apiService.fetchUsers();
     });
   }
 }

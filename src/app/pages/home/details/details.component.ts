@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -36,7 +36,7 @@ import { User } from '../../../models/User';
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
 })
-export class UserDetails implements OnInit {
+export class UserDetails implements OnInit, AfterViewInit {
   route: ActivatedRoute = inject(ActivatedRoute);
   router: Router = inject(Router);
   usersList: User[];
@@ -54,7 +54,14 @@ export class UserDetails implements OnInit {
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
+        phoneNumber: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(10),
+            Validators.maxLength(10),
+          ],
+        ],
         status: [false],
       }),
       primaryContactInfo: formBuilder.group({
@@ -62,40 +69,43 @@ export class UserDetails implements OnInit {
         street: [''],
         city: [''],
         state: [''],
-        pincode: [''],
+        pincode: ['', [Validators.minLength(6), Validators.maxLength(6)]],
       }),
       secondaryContactInfo: formBuilder.group({
         address: [''],
         street: [''],
         city: [''],
         state: [''],
-        pincode: [''],
+        pincode: ['', [Validators.minLength(6), Validators.maxLength(6)]],
         usePrimaryContact: [false],
       }),
     });
   }
 
   onSubmit(values: any) {
+    if (!this.userForm.valid) {
+      this.userForm.markAllAsTouched();
+      this.userForm.markAsDirty();
+      return;
+    }
     if (this.currentUser) this.updateUser();
     else this.createUser();
   }
 
   createUser() {
     this.apiService
-      .createUser({ ...this.userForm.value, id: this.usersList.length + 1 })
+      .createUser({ ...this.userForm.value })
       .subscribe((response) => {
+        this.apiService.fetchUsers();
         this.router.navigate(['/users']);
       });
   }
 
   updateUser() {
-    console.log(typeof this.currentUser.id.toString());
     this.apiService
-      .updateUser(
-        { ...this.userForm.value, id: this.currentUser.id },
-        this.currentUser.id.toString()
-      )
+      .updateUser({ ...this.userForm.value }, this.currentUser.id)
       .subscribe((response) => {
+        this.apiService.fetchUsers();
         this.router.navigate(['/users']);
       });
   }
@@ -119,6 +129,24 @@ export class UserDetails implements OnInit {
         const editUser = users.find((u) => u.id === userId);
         this.currentUser = editUser;
         this.userForm.patchValue(editUser);
+      }
+    });
+  }
+
+  ngAfterViewInit() {
+    this.userForm
+      .get('secondaryContactInfo.usePrimaryContact')
+      .valueChanges.subscribe((value: any) => {
+        if (value) {
+          this.userForm
+            .get('secondaryContactInfo')
+            .patchValue(this.userForm.get('primaryContactInfo').value);
+        }
+      });
+
+    this.userForm.get('primaryContactInfo').valueChanges.subscribe((value) => {
+      if (this.userForm.get('secondaryContactInfo.usePrimaryContact').value) {
+        this.userForm.get('secondaryContactInfo').patchValue(value);
       }
     });
   }

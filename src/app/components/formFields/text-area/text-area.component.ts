@@ -26,4 +26,5 @@ export class TextAreaComponent {
   @Input() required: boolean = false;
   @Input() disabled: boolean = false;
   @Input() value: any = '';
+  @Input() readonly: boolean = false;
 }

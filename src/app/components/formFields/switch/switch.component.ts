@@ -28,5 +28,7 @@ export class SwitchComponent {
   @Input() control: any = null;
   @Input() name: string = '';
   @Input() checked: boolean = false;
+  @Input() readonly: boolean = false;
+  @Input() disabled: boolean = false;
   @Output() onValueChange: EventEmitter<any> = new EventEmitter();
 }

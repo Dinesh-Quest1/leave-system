@@ -27,6 +27,9 @@
     <div class="section">
       <secondary-contact-info
         [fromGroup]="userForm.get('secondaryContactInfo')"
+        [readonly]="
+          userForm.get('secondaryContactInfo').get('usePrimaryContact').value
+        "
       ></secondary-contact-info>
     </div>
   </div>

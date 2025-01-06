@@ -56,7 +56,7 @@ export class MatBaseTableComponent implements OnInit {
 
   handleAction(action: Function, element: any, actionType: string) {
     if (actionType === 'delete') {
-      this.openDialog();
+      this.openDialog(element);
       return;
     }
     this.handleRowAction.emit({ action, element, actionType });
@@ -86,7 +86,7 @@ export class MatBaseTableComponent implements OnInit {
   }
 
   confirmOnModal() {
-    console.log('Modal confirmed');
+    console.log('Deleted');
   }
 
   dismissOnModal() {
@@ -95,18 +95,16 @@ export class MatBaseTableComponent implements OnInit {
 
   constructor(public dialog: MatDialog) {}
 
-  openDialog(): void {
+  openDialog(element: any): void {
     const dialogRef = this.dialog.open(ModalComponent, {
-      data: { title: 'Example', name: 'Example' },
+      data: { title: 'Example', name: 'Example', user: element },
       hasBackdrop: true,
       width: '400px',
       height: '200px',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-      if (result !== undefined) {
-      }
+      if (result === 'confirmed') this.onConfirmModal.emit(element);
     });
   }
 

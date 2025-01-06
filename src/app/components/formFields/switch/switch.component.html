@@ -3,6 +3,7 @@
   labelPosition="before"
   (change)="onValueChange.emit(control.value)"
   [checked]="checked"
+  [disabled]="readonly"
 >
   {{ label }}
 </mat-slide-toggle>
