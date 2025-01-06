@@ -3,9 +3,12 @@
     <img src="assets/logo.jpg" alt="logo" class="logo" />
     <ul class="nav-items">
       <li class="nav-item" *ngFor="let navItem of navItems">
-        <a class="nav-link" routerLink="{{ navItem.navigateTo }}">{{
-          navItem.name
-        }}</a>
+        <a
+          class="nav-link"
+          routerLink="{{ navItem.navigateTo }}"
+          routerLinkActive="active-link"
+          >{{ navItem.name }}</a
+        >
       </li>
     </ul>
   </div>
@@ -13,6 +16,6 @@
     <button type="button" class="btn add-details" routerLink="/users/details">
       Add Details
     </button>
-    <button type="button" class="btn emoji">&#128513;</button>
+    <mat-icon class="home-icon" fontIcon="sentiment_satisfied"></mat-icon>
   </div>
 </div>

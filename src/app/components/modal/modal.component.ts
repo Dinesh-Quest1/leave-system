@@ -1,13 +1,11 @@
 import {
   Component,
   EventEmitter,
-  inject,
   Input,
   Output,
   SimpleChanges,
 } from '@angular/core';
 import {
-  MatDialog,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
@@ -34,10 +32,6 @@ export class ModalComponent {
   @Input() content: string = 'This is a modal content.';
   @Output() onConfirm: EventEmitter<string> = new EventEmitter();
   @Output() onDismiss: EventEmitter<void> = new EventEmitter();
-
-  confirm(): void {
-    this.onConfirm.emit();
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['title']) {

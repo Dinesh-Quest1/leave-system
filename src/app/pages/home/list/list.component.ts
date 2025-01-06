@@ -17,6 +17,8 @@ import { User } from '../../../models/User';
 import { ApiService } from '../../../services/api.service';
 import { getUsers } from '../../../stores/app.selector';
 import { Api } from '../details/api.service';
+import { StatusComponent } from '../status/status.component';
+import { startLoader } from '../../../stores/app.action';
 
 const columns = [
   {
@@ -89,6 +91,7 @@ const columns = [
     MatBaseTableComponent,
     InputFieldComponent,
     SwitchComponent,
+    StatusComponent,
   ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
@@ -110,6 +113,7 @@ export class UsersList implements OnInit, AfterViewInit {
   statusControl = new FormControl('');
 
   onValueChange(user: User, value: boolean): void {
+    this.store.dispatch(startLoader());
     this.apiService
       .updateUser(
         { ...user, basicInfo: { ...user.basicInfo, status: value } },
@@ -143,6 +147,12 @@ export class UsersList implements OnInit, AfterViewInit {
         };
       }
       return column;
+    });
+  }
+
+  deleteUser(user: any): void {
+    this.apiService.deleteUser(user?.id).subscribe((response: any) => {
+      this.apiService.fetchUsers();
     });
   }
 }

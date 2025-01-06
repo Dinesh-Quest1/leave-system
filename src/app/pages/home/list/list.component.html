@@ -5,14 +5,14 @@
   [pageSize]="pageSize"
   [currentPage]="currentPage"
   (handleRowAction)="handleRowAction($event)"
+  (onConfirmModal)="deleteUser($event)"
 >
 </mat-base-table>
 
 <ng-template #statusTemplate let-element [let-onValueChange]="onValueChange">
-  <switch
-    [control]="statusControl"
-    [label]="'Status'"
+  <app-status
+    label="Status"
     (onValueChange)="onValueChange(element, $event)"
-    [checked]="element.basicInfo?.status || false"
-  />
+    [checked]="element.basicInfo.status"
+  ></app-status>
 </ng-template>

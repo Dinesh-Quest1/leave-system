@@ -6,6 +6,8 @@ const UPDATE_USER = 'UPDATE USER';
 const ADD_LEAVE = 'ADD LEAVE';
 const LOAD_LEAVE = 'LOAD LEAVE';
 const UPDATE_LEAVE = 'UPDATE LEAVE';
+const START_LOADER = 'START LOADER';
+const STOP_LOADER = 'STOP LOADER';
 
 export const addUser = createAction(ADD_USER, props<any>());
 
@@ -18,3 +20,7 @@ export const addLeave = createAction(ADD_LEAVE, props<any>());
 export const loadLeave = createAction(LOAD_LEAVE, props<any>());
 
 export const updateLeave = createAction(UPDATE_LEAVE, props<any>());
+
+export const startLoader = createAction(START_LOADER);
+
+export const stopLoader = createAction(STOP_LOADER);

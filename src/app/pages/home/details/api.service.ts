@@ -4,7 +4,7 @@ import { ApiService } from '../../../services/api.service';
 import { API_PATHS } from '../../../constants/apiPaths';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { loadUser } from '../../../stores/app.action';
+import { loadUser, startLoader, stopLoader } from '../../../stores/app.action';
 
 @Injectable({
   providedIn: 'root',
@@ -37,6 +37,7 @@ export class Api {
       this.store.dispatch(
         loadUser({ value: users.sort((a: User, b: User) => b.id - a.id) })
       );
+      this.store.dispatch(stopLoader());
     });
   }
 }
