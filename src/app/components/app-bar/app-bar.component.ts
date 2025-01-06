@@ -16,8 +16,4 @@ export class AppBarComponent {
   ];
 
   router: Router = inject(Router);
-
-  onClick(item: { name: string; navigateTo: string }) {
-    console.log(item.name);
-  }
 }

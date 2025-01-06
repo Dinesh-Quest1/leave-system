@@ -31,8 +31,4 @@ import { SwitchComponent } from '../../../../components/formFields/switch/switch
 })
 export class BasicInfoComponent {
   @Input() fromGroup!: any;
-
-  ngOnInit() {
-    console.log();
-  }
 }
