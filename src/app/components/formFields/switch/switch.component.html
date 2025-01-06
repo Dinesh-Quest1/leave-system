@@ -1,3 +1,8 @@
-<mat-slide-toggle [formControl]="control" labelPosition="before">
+<mat-slide-toggle
+  [formControl]="control"
+  labelPosition="before"
+  (change)="onValueChange.emit(control.value)"
+  [checked]="checked"
+>
   {{ label }}
 </mat-slide-toggle>

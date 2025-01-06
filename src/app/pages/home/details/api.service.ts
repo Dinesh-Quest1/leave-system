@@ -23,7 +23,6 @@ export class Api {
 
   updateUser(user: User, id: number): Observable<User> {
     const response = this.apiService.put(`${API_PATHS.USERS}`, id, user);
-    this.fetchUsers();
     return response;
   }
 

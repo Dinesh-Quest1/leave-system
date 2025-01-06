@@ -7,3 +7,12 @@
   (handleRowAction)="handleRowAction($event)"
 >
 </mat-base-table>
+
+<ng-template #statusTemplate let-element [let-onValueChange]="onValueChange">
+  <switch
+    [control]="statusControl"
+    [label]="'Status'"
+    (onValueChange)="onValueChange(element, $event)"
+    [checked]="element.basicInfo?.status || false"
+  />
+</ng-template>

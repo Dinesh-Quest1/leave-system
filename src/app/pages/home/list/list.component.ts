@@ -1,22 +1,28 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  inject,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { BaseTableComponent } from '../../../components/base-table/base-table.component';
+import { InputFieldComponent } from '../../../components/formFields/input-field/input-field.component';
+import { SwitchComponent } from '../../../components/formFields/switch/switch.component';
 import { MatBaseTableComponent } from '../../../components/mat-base-table/mat-base-table.component';
-import { MatPaginationComponent } from '../../../components/mat-pagination/mat-pagination.component';
-import { ModalComponent } from '../../../components/modal/modal.component';
-import { getUsers } from '../../../stores/app.selector';
+import { User } from '../../../models/User';
 import { ApiService } from '../../../services/api.service';
-import { API_PATHS } from '../../../constants/apiPaths';
-import { addUser, loadUser } from '../../../stores/app.action';
+import { getUsers } from '../../../stores/app.selector';
+import { Api } from '../details/api.service';
 
 const columns = [
   {
     header: 'Name',
     field: 'basicInfo',
     format: (data: any) => {
-      console.log(data);
       return data?.firstName + ' ' + data?.lastName || '';
     },
   },
@@ -39,6 +45,7 @@ const columns = [
     header: 'Status',
     field: 'primaryContactInfo',
     format: (data: any) => (data?.status ? 'Active' : 'Inactive'),
+    templateName: 'statusTemplate',
   },
   {
     header: 'Actions',
@@ -77,25 +84,45 @@ const columns = [
 @Component({
   selector: 'users-list',
   standalone: true,
-  imports: [CommonModule, MatBaseTableComponent],
+  imports: [
+    CommonModule,
+    MatBaseTableComponent,
+    InputFieldComponent,
+    SwitchComponent,
+  ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
   providers: [ApiService],
 })
-export class UsersList implements OnInit {
+export class UsersList implements OnInit, AfterViewInit {
   displayedColumns: any[] = columns;
   list: any[] = [];
   currentPage = 0;
   pageSize = 5;
   columns: any[] = columns;
   deleteId: any;
+  apiService: Api = inject(Api);
 
   constructor(private readonly router: Router, private readonly store: Store) {}
+
+  @ViewChild('statusTemplate') statusTemplate!: TemplateRef<any>;
+
+  statusControl = new FormControl('');
+
+  onValueChange(user: User, value: boolean): void {
+    this.apiService
+      .updateUser(
+        { ...user, basicInfo: { ...user.basicInfo, status: value } },
+        user?.id
+      )
+      .subscribe((value) => {
+        this.apiService.fetchUsers();
+      });
+  }
 
   handleRowAction({ action, element, actionType }: any): void {
     if (actionType === 'delete') {
       this.deleteId = element?.id;
-
       return;
     }
     action(element, this.router);
@@ -104,6 +131,18 @@ export class UsersList implements OnInit {
   ngOnInit() {
     this.store.select(getUsers).subscribe((value: any[]) => {
       this.list = value;
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this.displayedColumns = this.columns.map((column) => {
+      if (column.templateName === 'statusTemplate') {
+        return {
+          ...column,
+          template: this.statusTemplate,
+        };
+      }
+      return column;
     });
   }
 }

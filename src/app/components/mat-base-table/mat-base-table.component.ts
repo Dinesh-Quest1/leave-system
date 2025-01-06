@@ -3,17 +3,16 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  inject,
   Input,
   OnInit,
   Output,
   SimpleChanges,
 } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginationComponent } from '../mat-pagination/mat-pagination.component';
 import { ModalComponent } from '../modal/modal.component';
-import { MatDialog } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'mat-base-table',
@@ -37,6 +36,7 @@ export class MatBaseTableComponent implements OnInit {
   @Input() currentPage: number = 0;
   @Input() length: number = 0;
   @Input() modalContent: string = '';
+  @Input() templateControls: any[] = [];
 
   @Output() onConfirmModal: EventEmitter<any> = new EventEmitter();
   @Output() onDismissModal: EventEmitter<any> = new EventEmitter();
@@ -108,5 +108,9 @@ export class MatBaseTableComponent implements OnInit {
       if (result !== undefined) {
       }
     });
+  }
+
+  templateOnChange(rowData: any) {
+    console.log({ rowData });
   }
 }

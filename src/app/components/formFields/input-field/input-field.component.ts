@@ -1,4 +1,10 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import {
   FormControl,
   Validators,
@@ -31,4 +37,5 @@ export class InputFieldComponent {
   @Input() required: boolean = false;
   @Input() disabled: boolean = false;
   @Input() value: any = '';
+  @Output() onValueChange: EventEmitter<any> = new EventEmitter();
 }
