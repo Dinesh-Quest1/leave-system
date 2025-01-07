@@ -17,7 +17,7 @@ import { User } from '../../../ts/User.types';
 import { ApiService } from '../../../services/api.service';
 import { getUsers } from '../../../stores/app.selector';
 import { Api } from '../details/api.service';
-import { StatusComponent } from '../status/status.component';
+import { StatusComponent } from '../../../components/status/status.component';
 import { snackBar, startLoader } from '../../../stores/app.action';
 import { columns } from './columns';
 
