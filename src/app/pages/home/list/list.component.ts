@@ -58,8 +58,8 @@ const columns = [
         icon: 'edit',
         iconColor: 'primary',
         label: 'Edit',
-        action: (item: any, router: Router) => {
-          router.navigateByUrl('/users/details?action=edit&user=' + item?.id);
+        action: (item: User, router: Router) => {
+          router.navigateByUrl(`/users/details/${item?.id}?action=edit`);
         },
       },
       {
@@ -67,8 +67,8 @@ const columns = [
         icon: 'visibility',
         iconColor: 'accent',
         label: 'View',
-        action: (item: any, router: Router) => {
-          router.navigateByUrl('/users/details?action=view&user=' + item?.id);
+        action: (item: User, router: Router) => {
+          router.navigateByUrl(`/users/details/${item?.id}?action=view`);
         },
       },
       {
@@ -77,7 +77,7 @@ const columns = [
         iconColor: 'warn',
 
         label: 'Delete',
-        action: (item: any) => console.log('Delete clicked', item),
+        action: (item: User) => console.log('Delete clicked', item),
       },
     ],
   },

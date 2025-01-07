@@ -71,7 +71,7 @@ export class LeaveDetailsComponent {
   }
 
   ngOnInit() {
-    const userId = this.route.snapshot.queryParams?.['user'];
+    const userId = this.route.snapshot.paramMap?.get('user');
 
     this.store.select(getUsers).subscribe((users) => {
       this.usersList = users;

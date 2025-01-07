@@ -16,11 +16,19 @@ export const routes: Routes = [
     component: UserDetails,
   },
   {
+    path: 'users/details/:user',
+    component: UserDetails,
+  },
+  {
     path: 'leaves',
     component: LeavesComponent,
   },
   {
     path: 'leaves/details',
+    component: LeaveDetailsComponent,
+  },
+  {
+    path: 'leaves/details/:user',
     component: LeaveDetailsComponent,
   },
   { path: '**', component: NotFoundComponent },
