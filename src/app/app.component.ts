@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { AppBarComponent } from './components/app-bar/app-bar.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     LayoutComponent,
     CommonModule,
     SpinnerComponent,
+    SnackBarComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
