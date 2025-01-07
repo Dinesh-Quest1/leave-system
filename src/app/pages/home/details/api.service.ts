@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { API_PATHS } from '../../../constants/apiPaths';
 import { User } from '../../../models/User';
 import { ApiService } from '../../../services/api.service';
-import { API_PATHS } from '../../../constants/apiPaths';
-import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
 import { loadUser, startLoader, stopLoader } from '../../../stores/app.action';
 
 @Injectable({
@@ -33,6 +33,7 @@ export class Api {
   }
 
   fetchUsers(): void {
+    this.store.dispatch(startLoader());
     this.apiService.getAll(API_PATHS.USERS).subscribe((users: User[]) => {
       this.store.dispatch(
         loadUser({ value: users.sort((a: User, b: User) => b.id - a.id) })
