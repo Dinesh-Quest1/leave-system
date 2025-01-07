@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Leave } from '../../../models/Leave';
+import { Leave } from '../../../ts/Leave.types';
 import { ApiService } from '../../../services/api.service';
 import { API_PATHS } from '../../../constants/apiPaths';
 import { Observable } from 'rxjs';

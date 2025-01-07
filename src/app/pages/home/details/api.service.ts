@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { API_PATHS } from '../../../constants/apiPaths';
-import { User } from '../../../models/User';
+import { User } from '../../../ts/User.types';
 import { ApiService } from '../../../services/api.service';
 import { loadUser, startLoader, stopLoader } from '../../../stores/app.action';
 
@@ -21,12 +21,12 @@ export class Api {
     return response;
   }
 
-  updateUser(user: User, id: number): Observable<User> {
+  updateUser(user: User, id: string | number): Observable<User> {
     const response = this.apiService.put(`${API_PATHS.USERS}`, id, user);
     return response;
   }
 
-  deleteUser(id: number): Observable<any> {
+  deleteUser(id: number | string): Observable<any> {
     const response = this.apiService.delete(`${API_PATHS.USERS}`, id);
     this.fetchUsers();
     return response;
@@ -35,9 +35,8 @@ export class Api {
   fetchUsers(): void {
     this.store.dispatch(startLoader());
     this.apiService.getAll(API_PATHS.USERS).subscribe((users: User[]) => {
-      this.store.dispatch(
-        loadUser({ value: users.sort((a: User, b: User) => b.id - a.id) })
-      );
+      console.log('fetching users');
+      this.store.dispatch(loadUser({ value: users }));
       this.store.dispatch(stopLoader());
     });
   }

@@ -10,8 +10,9 @@ import {
   updateLeave,
   updateUser,
 } from './app.action';
+import { StoreState } from '../ts/store.types';
 
-export const initialState = {
+export const initialState: StoreState = {
   users: [],
   leaves: [],
   loading: false,
@@ -20,16 +21,17 @@ export const initialState = {
 
 export const AppReducer = createReducer(
   initialState,
-  on(loadUser, (state: any, action: any) => {
+  on(loadUser, (state: StoreState, action: any) => {
+    console.log(state);
     return { ...state, users: action.value || [] };
   }),
-  on(addUser, (state: any, action: any) => {
+  on(addUser, (state: StoreState, action: any) => {
     return { ...state, users: [...state.users, action.value] };
   }),
-  on(loadLeave, (state: any, action: any) => {
+  on(loadLeave, (state: StoreState, action: any) => {
     return { ...state, leaves: action.value };
   }),
-  on(addLeave, (state: any, action: any) => {
+  on(addLeave, (state: StoreState, action: any) => {
     return { ...state, leaves: [...state.leaves, action.value] };
   }),
   on(updateUser, (state, action: any) => {
