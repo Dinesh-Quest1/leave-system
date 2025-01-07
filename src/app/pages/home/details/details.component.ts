@@ -18,6 +18,7 @@ import { PrimaryContactInfoComponent } from './primary-contact-info/primary-cont
 import { SecondaryContactInfoComponent } from './secondary-contact-info/secondary-contact-info.component';
 import { Api } from './api.service';
 import { User } from '../../../models/User';
+import { startLoader, stopLoader } from '../../../stores/app.action';
 
 @Component({
   selector: 'user-details',
@@ -93,19 +94,24 @@ export class UserDetails implements OnInit, AfterViewInit {
   }
 
   createUser() {
+    this.store.dispatch(startLoader());
     this.apiService
       .createUser({ ...this.userForm.value })
       .subscribe((response) => {
         this.apiService.fetchUsers();
+        this.store.dispatch(stopLoader());
         this.router.navigate(['/users']);
       });
   }
 
   updateUser() {
+    this.store.dispatch(startLoader());
+
     this.apiService
       .updateUser({ ...this.userForm.value }, this.currentUser.id)
       .subscribe((response) => {
         this.apiService.fetchUsers();
+        this.store.dispatch(stopLoader());
         this.router.navigate(['/users']);
       });
   }
