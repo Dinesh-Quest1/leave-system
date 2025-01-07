@@ -26,4 +26,5 @@ import { TextAreaComponent } from '../../../../components/formFields/text-area/t
 })
 export class PrimaryContactInfoComponent {
   @Input() fromGroup: any;
+  @Input() readonly: boolean = false;
 }

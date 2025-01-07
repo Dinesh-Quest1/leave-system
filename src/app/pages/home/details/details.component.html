@@ -16,11 +16,15 @@
 <form [formGroup]="userForm">
   <div class="section-container">
     <div class="section">
-      <basic-info [fromGroup]="userForm.get('basicInfo')"></basic-info>
+      <basic-info
+        [fromGroup]="userForm.get('basicInfo')"
+        [readonly]="isViewMode"
+      ></basic-info>
     </div>
     <div class="section">
       <primary-contact-info
         [fromGroup]="userForm.get('primaryContactInfo')"
+        [readonly]="isViewMode"
       ></primary-contact-info>
     </div>
 
@@ -28,7 +32,8 @@
       <secondary-contact-info
         [fromGroup]="userForm.get('secondaryContactInfo')"
         [readonly]="
-          userForm.get('secondaryContactInfo').get('usePrimaryContact').value
+          userForm.get('secondaryContactInfo').get('usePrimaryContact').value ||
+          isViewMode
         "
       ></secondary-contact-info>
     </div>

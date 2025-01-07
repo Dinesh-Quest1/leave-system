@@ -4,26 +4,31 @@
     [label]="'Address'"
     [name]="'address'"
     [control]="fromGroup.get('address')"
+    [readonly]="readonly"
   ></text-area>
   <input-field
     [label]="'Street'"
     [name]="'street'"
     [control]="fromGroup.get('street')"
+    [readonly]="readonly"
   ></input-field>
   <input-field
     [label]="'City'"
     [name]="'city'"
     [control]="fromGroup.get('city')"
+    [readonly]="readonly"
   ></input-field>
   <input-field
     [label]="'State'"
     [name]="'state'"
     [control]="fromGroup.get('state')"
+    [readonly]="readonly"
   ></input-field>
   <input-field
     type="number"
     [label]="'Pincode'"
     [name]="'pincode'"
     [control]="fromGroup.get('pincode')"
+    [readonly]="readonly"
   ></input-field>
 </div>

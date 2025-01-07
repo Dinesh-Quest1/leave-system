@@ -31,4 +31,5 @@ import { SwitchComponent } from '../../../../components/formFields/switch/switch
 })
 export class BasicInfoComponent {
   @Input() fromGroup!: any;
+  @Input() readonly: boolean = false;
 }

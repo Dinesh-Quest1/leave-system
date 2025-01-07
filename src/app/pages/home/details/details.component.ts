@@ -47,6 +47,8 @@ export class UserDetails implements OnInit, AfterViewInit {
   store: Store = inject(Store);
   apiService: Api = inject(Api);
 
+  isViewMode: boolean | null = false;
+
   userForm: FormGroup;
 
   constructor(
@@ -125,13 +127,12 @@ export class UserDetails implements OnInit, AfterViewInit {
   }
 
   applyLeave() {
-    this.router.navigateByUrl(
-      '/leaves/details' + '?user=' + this.currentUser.id
-    );
+    this.router.navigateByUrl('/leaves/details/' + this.currentUser.id);
   }
 
   ngOnInit() {
-    const userId = this.route.snapshot.queryParams?.['user'];
+    const userId = this.route.snapshot.paramMap.get('user');
+    this.isViewMode = this.route.snapshot.queryParams?.['action'] === 'view';
 
     this.store.select(getUsers).subscribe((users) => {
       this.usersList = users;

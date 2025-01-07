@@ -4,25 +4,30 @@
     [label]="'First Name'"
     [name]="'firstName'"
     [control]="fromGroup.get('firstName')"
+    [readonly]="readonly"
   />
   <input-field
     [label]="'Last Name'"
     [name]="'lastName'"
     [control]="fromGroup.get('lastName')"
+    [readonly]="readonly"
   ></input-field>
   <input-field
     [label]="'Email'"
     [name]="'email'"
     [control]="fromGroup.get('email')"
+    [readonly]="readonly"
   ></input-field>
   <input-field
     [label]="'Phone Number'"
     [name]="'phoneNumber'"
     [control]="fromGroup.get('phoneNumber')"
+    [readonly]="readonly"
   ></input-field>
   <switch
     [label]="'Status'"
     [control]="fromGroup.get('status')"
     [name]="'status'"
+    [readonly]="readonly"
   ></switch>
 </div>
