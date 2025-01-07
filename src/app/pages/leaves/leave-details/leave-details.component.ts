@@ -7,6 +7,7 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { DetailsHeaderComponent } from '../../../components/details-header/details-header.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -51,14 +52,19 @@ export class LeaveDetailsComponent {
 
   constructor(formBuilder: FormBuilder, private readonly apiService: Api) {
     this.leaveForm = formBuilder.group({
-      typeOfLeave: [''],
+      typeOfLeave: ['', [Validators.required]],
       comments: [''],
-      startDate: [''],
-      endDate: [''],
+      startDate: ['', [Validators.required]],
+      endDate: ['', [Validators.required]],
     });
   }
 
   onSubmit(values: any) {
+    if (!this.leaveForm.valid) {
+      this.leaveForm.markAllAsTouched();
+      this.leaveForm.markAsDirty();
+      return;
+    }
     this.createLeave();
   }
 
@@ -66,6 +72,7 @@ export class LeaveDetailsComponent {
     this.apiService
       .createLeave({ ...this.leaveForm.value, userId: this.currentUser.id })
       .subscribe((response) => {
+        this.apiService.fetchLeaves();
         this.router.navigate(['/leaves']);
       });
   }
