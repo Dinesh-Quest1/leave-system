@@ -1,6 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { User } from '../models/User';
 import { Leave } from '../models/Leave';
+import { SnackBarDetail } from '../components/snack-bar/snack-bar.component';
 
 const appStore = createFeatureSelector<any>('app');
 
@@ -17,4 +18,9 @@ export const getLeaves = createSelector(
 export const getLoadingState = createSelector(
   appStore,
   (state): boolean => state.loading
+);
+
+export const getSnackBarState = createSelector(
+  appStore,
+  (state): SnackBarDetail => state.snackBar
 );

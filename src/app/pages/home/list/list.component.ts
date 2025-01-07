@@ -18,7 +18,7 @@ import { ApiService } from '../../../services/api.service';
 import { getUsers } from '../../../stores/app.selector';
 import { Api } from '../details/api.service';
 import { StatusComponent } from '../status/status.component';
-import { startLoader } from '../../../stores/app.action';
+import { snackBar, startLoader } from '../../../stores/app.action';
 
 const columns = [
   {
@@ -152,6 +152,7 @@ export class UsersList implements OnInit, AfterViewInit {
 
   deleteUser(user: any): void {
     this.apiService.deleteUser(user?.id).subscribe((response: any) => {
+      this.store.dispatch(snackBar({ message: 'User deleted successfully' }));
       this.apiService.fetchUsers();
     });
   }

@@ -12,13 +12,14 @@ import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { DetailsHeaderComponent } from '../../../components/details-header/details-header.component';
+import { User } from '../../../models/User';
+import { StorageService } from '../../../services/storage.service';
+import { snackBar, startLoader, stopLoader } from '../../../stores/app.action';
 import { getUsers } from '../../../stores/app.selector';
+import { Api } from './api.service';
 import { BasicInfoComponent } from './basic-info/basic-info.component';
 import { PrimaryContactInfoComponent } from './primary-contact-info/primary-contact-info.component';
 import { SecondaryContactInfoComponent } from './secondary-contact-info/secondary-contact-info.component';
-import { Api } from './api.service';
-import { User } from '../../../models/User';
-import { startLoader, stopLoader } from '../../../stores/app.action';
 
 @Component({
   selector: 'user-details',
@@ -49,7 +50,10 @@ export class UserDetails implements OnInit, AfterViewInit {
 
   userForm: FormGroup;
 
-  constructor(formBuilder: FormBuilder) {
+  constructor(
+    formBuilder: FormBuilder,
+    private readonly storage: StorageService
+  ) {
     this.userForm = formBuilder.group({
       basicInfo: formBuilder.group({
         firstName: ['', Validators.required],
@@ -98,6 +102,7 @@ export class UserDetails implements OnInit, AfterViewInit {
     this.apiService
       .createUser({ ...this.userForm.value })
       .subscribe((response) => {
+        this.store.dispatch(snackBar({ message: 'User created successfully' }));
         this.apiService.fetchUsers();
         this.store.dispatch(stopLoader());
         this.router.navigate(['/users']);
@@ -106,10 +111,10 @@ export class UserDetails implements OnInit, AfterViewInit {
 
   updateUser() {
     this.store.dispatch(startLoader());
-
     this.apiService
       .updateUser({ ...this.userForm.value }, this.currentUser.id)
       .subscribe((response) => {
+        this.store.dispatch(snackBar({ message: 'User updated successfully' }));
         this.apiService.fetchUsers();
         this.store.dispatch(stopLoader());
         this.router.navigate(['/users']);
@@ -137,6 +142,14 @@ export class UserDetails implements OnInit, AfterViewInit {
         this.userForm.patchValue(editUser);
       }
     });
+
+    this.userForm.patchValue(this.storage.getItem('userForm'));
+  }
+
+  updateUrlState(key: string, value: string) {
+    this.router.navigate([], {
+      state: { [key]: value },
+    });
   }
 
   ngAfterViewInit() {
@@ -155,5 +168,13 @@ export class UserDetails implements OnInit, AfterViewInit {
         this.userForm.get('secondaryContactInfo').patchValue(value);
       }
     });
+
+    this.userForm.valueChanges.subscribe((value: User) => {
+      this.storage.storeItem('userForm', value);
+    });
+  }
+
+  ngOnDestroy() {
+    this.storage.removeItem('userForm');
   }
 }

@@ -4,6 +4,7 @@ import {
   addUser,
   loadLeave,
   loadUser,
+  snackBar,
   startLoader,
   stopLoader,
   updateLeave,
@@ -14,6 +15,7 @@ export const initialState = {
   users: [],
   leaves: [],
   loading: false,
+  snackBar: null,
 };
 
 export const AppReducer = createReducer(
@@ -41,5 +43,11 @@ export const AppReducer = createReducer(
   }),
   on(stopLoader, (state) => {
     return { ...state, loading: false };
+  }),
+  on(snackBar, (state, action: any) => {
+    return {
+      ...state,
+      snackBar: action?.message ? { message: action?.message } : null,
+    };
   })
 );
