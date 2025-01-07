@@ -1,5 +1,5 @@
-export interface User {
-  id: number;
+export type User = {
+  id?: number | string;
   basicInfo: {
     firstName: string;
     lastName: string;
@@ -22,4 +22,8 @@ export interface User {
     pincode?: string | number;
     usePrimaryContact?: [false];
   };
-}
+};
+
+export type UsersById = {
+  [id: string]: User[];
+};

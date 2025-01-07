@@ -6,8 +6,8 @@ import { Router } from '@angular/router';
 import { CardComponent } from '../../../components/card/card.component';
 import { GroupArrayByKeyPipe } from '../../../pipes/group-array-by-key.pipe';
 import { CommonModule } from '@angular/common';
-import { User } from '../../../models/User';
-import { Leave } from '../../../models/Leave';
+import { User } from '../../../ts/User.types';
+import { Leave } from '../../../ts/Leave.types';
 
 @Component({
   selector: 'leaves',
@@ -22,8 +22,8 @@ import { Leave } from '../../../models/Leave';
   styleUrl: './leaves.component.scss',
 })
 export class LeavesComponent {
-  list: any[] = [];
-  users: any[] = [];
+  list: Leave[] = [];
+  users: User[] = [];
   filteredList: Leave[] = [];
 
   selectedUser: User = null;
@@ -36,19 +36,18 @@ export class LeavesComponent {
     }
     this.selectedUser = user;
     this.filteredList = this.list.filter(
-      (user) => user.userId === this.selectedUser?.id
+      (leave: Leave) => leave.userId === this.selectedUser?.id
     );
   }
 
   store: Store = inject(Store);
 
   ngOnInit() {
-    console.log(this.list);
-    this.store.select(getLeaves).subscribe((value: any[]) => {
+    this.store.select(getLeaves).subscribe((value: Leave[]) => {
       this.list = value;
       this.filteredList = value;
     });
-    this.store.select(getUsers).subscribe((value: any[]) => {
+    this.store.select(getUsers).subscribe((value: User[]) => {
       this.users = value;
     });
   }

@@ -13,7 +13,7 @@ import { Store } from '@ngrx/store';
 import { InputFieldComponent } from '../../../components/formFields/input-field/input-field.component';
 import { SwitchComponent } from '../../../components/formFields/switch/switch.component';
 import { MatBaseTableComponent } from '../../../components/mat-base-table/mat-base-table.component';
-import { User } from '../../../models/User';
+import { User } from '../../../ts/User.types';
 import { ApiService } from '../../../services/api.service';
 import { getUsers } from '../../../stores/app.selector';
 import { Api } from '../details/api.service';

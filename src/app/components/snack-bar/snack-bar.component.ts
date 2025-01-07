@@ -10,10 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { Store } from '@ngrx/store';
 import { getSnackBarState } from '../../stores/app.selector';
 import { snackBar } from '../../stores/app.action';
-
-export interface SnackBarDetail {
-  message: string;
-}
+import { SnackBar } from '../../ts/global.types';
 
 @Component({
   selector: 'snack-bar',
@@ -27,7 +24,7 @@ export class SnackBarComponent {
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   duration: number = 5 * 1000;
 
-  @Input() snackBarDetail: SnackBarDetail | null = null;
+  @Input() snackBarDetail: SnackBar | null = null;
 
   constructor(
     private readonly _snackBar: MatSnackBar,
@@ -37,8 +34,7 @@ export class SnackBarComponent {
   ngOnInit(): void {
     this.store
       .select(getSnackBarState)
-      .subscribe((snackBarDetail: SnackBarDetail | null) => {
-        console.log({ snackBarDetail });
+      .subscribe((snackBarDetail: SnackBar | null) => {
         this.snackBarDetail = snackBarDetail;
         if (snackBarDetail) {
           this.openSnackBar();

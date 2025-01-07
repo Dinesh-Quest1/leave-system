@@ -13,7 +13,6 @@ export class DetailsHeaderComponent {
   @Input() disableLeave: boolean = false;
   @Input() title: string = '';
   @Input() header: string = '';
-  @Input() renderTemplate: any = null;
   @Input() enableApplyLeave: boolean = false;
   @Output() onSave: EventEmitter<any> = new EventEmitter();
   @Output() onApplyLeave: EventEmitter<any> = new EventEmitter();

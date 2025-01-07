@@ -12,7 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { DetailsHeaderComponent } from '../../../components/details-header/details-header.component';
-import { User } from '../../../models/User';
+import { User } from '../../../ts/User.types';
 import { StorageService } from '../../../services/storage.service';
 import { snackBar, startLoader, stopLoader } from '../../../stores/app.action';
 import { getUsers } from '../../../stores/app.selector';
@@ -42,11 +42,10 @@ export class UserDetails implements OnInit, AfterViewInit {
   route: ActivatedRoute = inject(ActivatedRoute);
   router: Router = inject(Router);
   usersList: User[];
+  currentUser: User;
 
   store: Store = inject(Store);
   apiService: Api = inject(Api);
-
-  currentUser: any;
 
   userForm: FormGroup;
 
@@ -87,7 +86,7 @@ export class UserDetails implements OnInit, AfterViewInit {
     });
   }
 
-  onSubmit(values: any) {
+  onSubmit() {
     if (!this.userForm.valid) {
       this.userForm.markAllAsTouched();
       this.userForm.markAsDirty();
