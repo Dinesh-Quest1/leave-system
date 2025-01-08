@@ -1,13 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -25,7 +17,7 @@ import { MatInputModule } from '@angular/material/input';
   templateUrl: './input-field.component.html',
   styleUrl: './input-field.component.scss',
 })
-export class InputFieldComponent implements OnChanges, OnInit {
+export class InputFieldComponent {
   @Input() label: string = 'Name';
   @Input() control: any = null;
   @Input() name: string = 'name';
@@ -33,14 +25,8 @@ export class InputFieldComponent implements OnChanges, OnInit {
   @Input() type: string = 'text';
   @Input() required: boolean = false;
   @Input() disabled: boolean = false;
-  @Input() value: any = '';
+  @Input() value: string = '';
   @Input() readonly: boolean = false;
 
   @Output() onValueChange: EventEmitter<any> = new EventEmitter();
-
-  ngOnInit() {}
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(this.control.errors);
-  }
 }

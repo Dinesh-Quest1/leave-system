@@ -1,17 +1,15 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AppBarComponent } from '../../components/app-bar/app-bar.component';
 import { API_PATHS } from '../../constants/apiPaths';
 import { ApiService } from '../../services/api.service';
 import { loadLeave, startLoader, stopLoader } from '../../stores/app.action';
 import { Api } from '../home/details/api.service';
-import { UsersList } from '../home/list/list.component';
 
 @Component({
   selector: 'layout',
   standalone: true,
-  imports: [AppBarComponent, UsersList, RouterModule],
+  imports: [RouterModule],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
 })

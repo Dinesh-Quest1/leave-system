@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginationComponent } from '../mat-pagination/mat-pagination.component';
 import { ModalComponent } from '../modal/modal.component';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'mat-base-table',
@@ -21,7 +22,6 @@ import { ModalComponent } from '../modal/modal.component';
     MatTableModule,
     CommonModule,
     MatPaginationComponent,
-    ModalComponent,
     MatIconModule,
   ],
   templateUrl: './mat-base-table.component.html',
@@ -30,7 +30,7 @@ import { ModalComponent } from '../modal/modal.component';
 })
 export class MatBaseTableComponent implements OnInit {
   @Input() displayedColumns: any = [];
-  @Input() tableData: any | undefined;
+  @Input() tableData: any[] | undefined;
 
   @Input() pageSize: number = 0;
   @Input() currentPage: number = 0;
@@ -45,7 +45,7 @@ export class MatBaseTableComponent implements OnInit {
 
   headers: string[] = [];
 
-  onPaginationChange({ pageIndex, pageSize }: any) {
+  onPaginationChange({ pageIndex, pageSize }: PageEvent): void {
     const dataToRender = this.tableData.slice(
       pageIndex * pageSize,
       pageSize * pageIndex + pageSize

@@ -1,21 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { DetailsHeaderComponent } from '../../../components/details-header/details-header.component';
-import { User } from '../../../ts/User.types';
+import { formGroup } from '../../../constants/users';
+import { ConcatStringPipe } from '../../../pipes/concat-string.pipe';
 import { StorageService } from '../../../services/storage.service';
 import { snackBar, startLoader, stopLoader } from '../../../stores/app.action';
 import { getUsers } from '../../../stores/app.selector';
+import { User } from '../../../ts/User.types';
 import { Api } from './api.service';
 import { BasicInfoComponent } from './basic-info/basic-info.component';
 import { PrimaryContactInfoComponent } from './primary-contact-info/primary-contact-info.component';
@@ -34,61 +30,29 @@ import { SecondaryContactInfoComponent } from './secondary-contact-info/secondar
     FormsModule,
     MatInputModule,
     CommonModule,
+    ConcatStringPipe,
   ],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss',
 })
 export class UserDetails implements OnInit, AfterViewInit {
-  route: ActivatedRoute = inject(ActivatedRoute);
-  router: Router = inject(Router);
   usersList: User[];
   currentUser: User;
-
-  store: Store = inject(Store);
-  apiService: Api = inject(Api);
-
   isViewMode: boolean | null = false;
 
   userForm: FormGroup;
 
   constructor(
-    formBuilder: FormBuilder,
-    private readonly storage: StorageService
+    private readonly storage: StorageService,
+    private readonly apiService: Api,
+    private readonly store: Store,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute
   ) {
-    this.userForm = formBuilder.group({
-      basicInfo: formBuilder.group({
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
-        phoneNumber: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(10),
-            Validators.maxLength(10),
-          ],
-        ],
-        status: [false],
-      }),
-      primaryContactInfo: formBuilder.group({
-        address: [''],
-        street: [''],
-        city: [''],
-        state: [''],
-        pincode: ['', [Validators.minLength(6), Validators.maxLength(6)]],
-      }),
-      secondaryContactInfo: formBuilder.group({
-        address: [''],
-        street: [''],
-        city: [''],
-        state: [''],
-        pincode: ['', [Validators.minLength(6), Validators.maxLength(6)]],
-        usePrimaryContact: [false],
-      }),
-    });
+    this.userForm = formGroup;
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (!this.userForm.valid) {
       this.userForm.markAllAsTouched();
       this.userForm.markAsDirty();
@@ -98,23 +62,21 @@ export class UserDetails implements OnInit, AfterViewInit {
     else this.createUser();
   }
 
-  createUser() {
+  createUser(): void {
     this.store.dispatch(startLoader());
-    this.apiService
-      .createUser({ ...this.userForm.value })
-      .subscribe((response) => {
-        this.store.dispatch(snackBar({ message: 'User created successfully' }));
-        this.apiService.fetchUsers();
-        this.store.dispatch(stopLoader());
-        this.router.navigate(['/users']);
-      });
+    this.apiService.createUser({ ...this.userForm.value }).subscribe(() => {
+      this.store.dispatch(snackBar({ message: 'User created successfully' }));
+      this.apiService.fetchUsers();
+      this.store.dispatch(stopLoader());
+      this.router.navigate(['/users']);
+    });
   }
 
-  updateUser() {
+  updateUser(): void {
     this.store.dispatch(startLoader());
     this.apiService
       .updateUser({ ...this.userForm.value }, this.currentUser.id)
-      .subscribe((response) => {
+      .subscribe(() => {
         this.store.dispatch(snackBar({ message: 'User updated successfully' }));
         this.apiService.fetchUsers();
         this.store.dispatch(stopLoader());
@@ -122,34 +84,28 @@ export class UserDetails implements OnInit, AfterViewInit {
       });
   }
 
-  onCancel() {
+  onCancel(): void {
     this.router.navigate(['/users']);
   }
 
-  applyLeave() {
+  applyLeave(): void {
     this.router.navigateByUrl('/leaves/details/' + this.currentUser.id);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     const userId = this.route.snapshot.paramMap.get('user');
     this.isViewMode = this.route.snapshot.queryParams?.['action'] === 'view';
 
-    this.store.select(getUsers).subscribe((users) => {
+    this.store.select(getUsers).subscribe((users: User[]) => {
       this.usersList = users;
       if (userId) {
-        const editUser = users.find((u) => u.id === userId);
+        const editUser = users.find((user: User) => user.id === userId);
         this.currentUser = editUser;
         this.userForm.patchValue(editUser);
       }
     });
 
     this.userForm.patchValue(this.storage.getItem('userForm'));
-  }
-
-  updateUrlState(key: string, value: string) {
-    this.router.navigate([], {
-      state: { [key]: value },
-    });
   }
 
   ngAfterViewInit() {

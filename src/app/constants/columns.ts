@@ -1,7 +1,8 @@
 import { Router } from '@angular/router';
-import { User } from '../../../ts/User.types';
+import { User } from '../ts/User.types';
+import { TableColumn } from '../ts/global.types';
 
-export const columns = [
+export const columns: TableColumn[] = [
   {
     header: 'Name',
     field: 'basicInfo',
@@ -56,7 +57,6 @@ export const columns = [
         header: 'delete',
         icon: 'delete',
         iconColor: 'warn',
-
         label: 'Delete',
         action: (item: User) => console.log('Delete clicked', item),
       },

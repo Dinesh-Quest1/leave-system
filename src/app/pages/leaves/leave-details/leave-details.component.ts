@@ -1,21 +1,18 @@
-import { Component, inject } from '@angular/core';
-import { getUsers } from '../../../stores/app.selector';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { DetailsHeaderComponent } from '../../../components/details-header/details-header.component';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { DetailsHeaderComponent } from '../../../components/details-header/details-header.component';
 import { DateFieldComponent } from '../../../components/formFields/date-field/date-field.component';
 import { InputFieldComponent } from '../../../components/formFields/input-field/input-field.component';
 import { TextAreaComponent } from '../../../components/formFields/text-area/text-area.component';
+import { formGroup } from '../../../constants/leaves';
+import { ConcatStringPipe } from '../../../pipes/concat-string.pipe';
+import { getUsers } from '../../../stores/app.selector';
+import { User } from '../../../ts/User.types';
 import { Api } from './api.service';
 
 @Component({
@@ -31,35 +28,26 @@ import { Api } from './api.service';
     DateFieldComponent,
     InputFieldComponent,
     TextAreaComponent,
+    ConcatStringPipe,
   ],
   templateUrl: './leave-details.component.html',
   styleUrl: './leave-details.component.scss',
 })
 export class LeaveDetailsComponent {
-  route: ActivatedRoute = inject(ActivatedRoute);
-  router: Router = inject(Router);
-
-  store: Store = inject(Store);
-
-  currentUser: any;
-
+  currentUser: User = null;
   leaveForm: FormGroup;
-  usersList: any[];
+  usersList: User[];
 
-  onCancel() {
-    this.router.navigate(['/leaves']);
+  constructor(
+    private readonly apiService: Api,
+    private readonly router: Router,
+    private readonly store: Store,
+    private readonly route: ActivatedRoute
+  ) {
+    this.leaveForm = formGroup;
   }
 
-  constructor(formBuilder: FormBuilder, private readonly apiService: Api) {
-    this.leaveForm = formBuilder.group({
-      typeOfLeave: ['', [Validators.required]],
-      comments: [''],
-      startDate: ['', [Validators.required]],
-      endDate: ['', [Validators.required]],
-    });
-  }
-
-  onSubmit(values: any) {
+  onSubmit() {
     if (!this.leaveForm.valid) {
       this.leaveForm.markAllAsTouched();
       this.leaveForm.markAsDirty();
@@ -68,10 +56,14 @@ export class LeaveDetailsComponent {
     this.createLeave();
   }
 
+  onCancel() {
+    this.router.navigate(['/leaves']);
+  }
+
   createLeave() {
     this.apiService
       .createLeave({ ...this.leaveForm.value, userId: this.currentUser.id })
-      .subscribe((response) => {
+      .subscribe(() => {
         this.apiService.fetchLeaves();
         this.router.navigate(['/leaves']);
       });

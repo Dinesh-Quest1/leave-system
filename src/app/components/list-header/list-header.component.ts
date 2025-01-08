@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, output, Output } from '@angular/core';
-import { AutoCompleteComponent } from '../formFields/auto-complete/auto-complete.component';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { User } from '../../ts/User.types';
+import { AutoCompleteComponent } from '../formFields/auto-complete/auto-complete.component';
 
 @Component({
   selector: 'list-header',

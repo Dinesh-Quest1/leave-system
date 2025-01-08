@@ -6,7 +6,7 @@
         "lastName": "Kumar R",
         "email": "dinesh.kumar@vhitechlab.com",
         "phoneNumber": "7448993030",
-        "status": true
+        "status": false
       },
       "primaryContactInfo": {
         "address": "10, main road",
@@ -24,6 +24,31 @@
         "usePrimaryContact": true
       },
       "id": "fcae"
+    },
+    {
+      "id": "c6c6",
+      "basicInfo": {
+        "firstName": "David",
+        "lastName": "Charles",
+        "email": "dinesh.kumar@vhitechlab.com",
+        "phoneNumber": "7448993029",
+        "status": true
+      },
+      "primaryContactInfo": {
+        "address": "10, main road",
+        "street": "10, main road",
+        "city": "Chennai",
+        "state": "Tamilnadu",
+        "pincode": "600234"
+      },
+      "secondaryContactInfo": {
+        "address": "",
+        "street": "",
+        "city": "",
+        "state": "",
+        "pincode": "",
+        "usePrimaryContact": false
+      }
     }
   ],
   "leaves": [
