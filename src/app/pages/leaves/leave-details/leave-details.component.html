@@ -31,6 +31,11 @@
         [name]="'endDate'"
         [label]="'End Date'"
         [control]="leaveForm.get('endDate')"
+        [error]="
+          this.leaveForm.errors?.['dateExceeds']
+            ? this.leaveForm.errors?.['dateExceeds']?.error
+            : null
+        "
       ></date-field>
     </div>
   </div>

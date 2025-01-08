@@ -15,8 +15,4 @@ import { User, UsersById } from '../../ts/User.types';
 export class CardComponent {
   @Input() leaveDetail: Leave;
   @Input() users: UsersById;
-
-  ngOnInit() {
-    console.log(this.leaveDetail, 'leave details');
-  }
 }

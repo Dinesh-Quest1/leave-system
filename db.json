@@ -6,7 +6,7 @@
         "lastName": "Kumar R",
         "email": "dinesh.kumar@vhitechlab.com",
         "phoneNumber": "7448993030",
-        "status": false
+        "status": true
       },
       "primaryContactInfo": {
         "address": "10, main road",
@@ -32,7 +32,7 @@
         "lastName": "Charles",
         "email": "dinesh.kumar@vhitechlab.com",
         "phoneNumber": "7448993029",
-        "status": true
+        "status": false
       },
       "primaryContactInfo": {
         "address": "10, main road",

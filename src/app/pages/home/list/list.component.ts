@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   OnInit,
   TemplateRef,
@@ -36,7 +37,8 @@ export class UsersList implements OnInit, AfterViewInit {
   constructor(
     private readonly router: Router,
     private readonly store: Store,
-    private readonly apiService: Api
+    private readonly apiService: Api,
+    private readonly cdr: ChangeDetectorRef
   ) {}
 
   @ViewChild('statusTemplate') statusTemplate!: TemplateRef<any>;
@@ -77,6 +79,7 @@ export class UsersList implements OnInit, AfterViewInit {
       }
       return column;
     });
+    this.cdr.detectChanges();
   }
 
   deleteUser(user: any): void {

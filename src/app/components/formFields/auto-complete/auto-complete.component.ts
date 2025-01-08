@@ -30,7 +30,7 @@ export class AutoCompleteComponent {
   @Input() disabled: boolean = false;
   @Input() value: any = '';
 
-  filteredOptions: string[];
+  filteredOptions: any[];
 
   constructor() {
     this.filteredOptions = this.options.slice();

@@ -2,6 +2,11 @@
   <mat-label>{{ label }}</mat-label>
   <input matInput [matDatepicker]="picker1" [formControl]="control" />
   <mat-hint>MM/DD/YYYY</mat-hint>
+  <mat-error *ngIf="control?.invalid && (control?.touched || control?.dirty)">
+    <span *ngIf="!control.valid || error">{{
+      { control , error} | formErrorMessage : label
+    }}</span>
+  </mat-error>
   <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
   <mat-datepicker #picker1></mat-datepicker>
 </mat-form-field>

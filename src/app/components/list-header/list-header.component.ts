@@ -29,7 +29,6 @@ export class ListHeaderComponent {
 
   ngOnInit(): void {
     this.userFilter.valueChanges.subscribe((value) => {
-      console.log(value);
       this.onUserSelect.emit(value);
     });
   }

@@ -1,8 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { FormErrorMessagePipe } from '../../../pipes/form-error-message.pipe';
 
 @Component({
   selector: 'input-field',
@@ -13,6 +22,7 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     ReactiveFormsModule,
     CommonModule,
+    FormErrorMessagePipe,
   ],
   templateUrl: './input-field.component.html',
   styleUrl: './input-field.component.scss',

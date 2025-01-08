@@ -80,5 +80,9 @@ export class LeaveDetailsComponent {
         this.leaveForm.patchValue(editUser);
       }
     });
+
+    this.leaveForm.valueChanges.subscribe((value) => {
+      console.log(value, this.leaveForm.errors);
+    });
   }
 }
