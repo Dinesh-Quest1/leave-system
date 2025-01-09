@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { API_PATHS } from '../../../constants/apiPaths';
-import { User } from '../../../ts/User.types';
 import { ApiService } from '../../../services/api.service';
-import { loadUser, startLoader, stopLoader } from '../../../stores/app.action';
+import { loadUser } from '../../../stores/app.action';
+import { User } from '../../../ts/User.types';
 
 @Injectable({
   providedIn: 'root',
@@ -33,11 +33,8 @@ export class Api {
   }
 
   fetchUsers(): void {
-    this.store.dispatch(startLoader());
     this.apiService.getAll(API_PATHS.USERS).subscribe((users: User[]) => {
-      console.log('fetching users');
       this.store.dispatch(loadUser({ value: users }));
-      this.store.dispatch(stopLoader());
     });
   }
 }

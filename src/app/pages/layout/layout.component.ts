@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { API_PATHS } from '../../constants/apiPaths';
 import { ApiService } from '../../services/api.service';
-import { loadLeave, startLoader, stopLoader } from '../../stores/app.action';
+import { loadLeave, stopLoader } from '../../stores/app.action';
 import { Api } from '../home/details/api.service';
 
 @Component({
@@ -21,7 +21,6 @@ export class LayoutComponent {
   ) {}
   ngOnInit() {
     this.api.fetchUsers();
-    this.store.dispatch(startLoader());
     this.apiService.getAll(API_PATHS.LEAVES).subscribe((value: any) => {
       this.store.dispatch(loadLeave({ value }));
       this.store.dispatch(stopLoader());

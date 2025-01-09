@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { FormControl } from '@angular/forms';
 
 @Pipe({
   name: 'formErrorMessage',
@@ -7,21 +6,20 @@ import { FormControl } from '@angular/forms';
 })
 export class FormErrorMessagePipe implements PipeTransform {
   transform(
-    controlObj: { control: FormControl<any>; error?: string | null } | null,
+    control: any,
     label: string,
     error?: string | null,
     ...args: unknown[]
   ): string {
     if (error) return error;
-    if (controlObj?.control?.errors?.['required'])
-      return label + ' is required';
-    if (controlObj?.control?.errors?.['minlength'])
+    if (control?.errors?.['required']) return label + ' is required';
+    if (control?.errors?.['minlength'])
       return `Minimum length is
-      ${controlObj?.control.errors['minlength'].requiredLength} characters.`;
-    if (controlObj?.control?.errors?.['maxlength'])
+      ${control.errors['minlength'].requiredLength} characters.`;
+    if (control?.errors?.['maxlength'])
       return `Maximum length is
-      ${controlObj?.control.errors['maxlength'].requiredLength} characters.`;
-    if (controlObj?.control?.errors?.['email'])
+      ${control.errors['maxlength'].requiredLength} characters.`;
+    if (control?.errors?.['email'])
       return 'Please enter a valid email address.';
     return '';
   }

@@ -81,8 +81,6 @@ export class LeaveDetailsComponent {
       }
     });
 
-    this.leaveForm.valueChanges.subscribe((value) => {
-      console.log(value, this.leaveForm.errors);
-    });
+    this.leaveForm.valueChanges.subscribe((value) => {});
   }
 }

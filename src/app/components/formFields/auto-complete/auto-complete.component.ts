@@ -3,6 +3,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'auto-complete',
@@ -13,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
+    MatIconModule,
   ],
   templateUrl: './auto-complete.component.html',
   styleUrl: './auto-complete.component.scss',
@@ -59,5 +61,10 @@ export class AutoCompleteComponent {
       return option?.[this.displayWith] || '';
     }
     return option;
+  }
+
+  onClear(): void {
+    console.log('clearing');
+    this.control.setValue('');
   }
 }

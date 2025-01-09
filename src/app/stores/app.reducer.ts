@@ -22,7 +22,6 @@ export const initialState: StoreState = {
 export const AppReducer = createReducer(
   initialState,
   on(loadUser, (state: StoreState, action: any) => {
-    console.log(state);
     return { ...state, users: action.value || [] };
   }),
   on(addUser, (state: StoreState, action: any) => {

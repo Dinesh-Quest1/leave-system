@@ -21,4 +21,8 @@
     >
     }
   </mat-autocomplete>
+  @if (control.value) {
+  <mat-icon color="primary" matSuffix fontIcon="cancel" (click)="onClear()">
+  </mat-icon>
+  }
 </mat-form-field>

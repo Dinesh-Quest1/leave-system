@@ -13,7 +13,7 @@ import { MatBaseTableComponent } from '../../../components/mat-base-table/mat-ba
 import { StatusComponent } from '../../../components/status/status.component';
 import { columns } from '../../../constants/columns';
 import { ApiService } from '../../../services/api.service';
-import { snackBar, startLoader } from '../../../stores/app.action';
+import { snackBar } from '../../../stores/app.action';
 import { getUsers } from '../../../stores/app.selector';
 import { User } from '../../../ts/User.types';
 import { Api } from '../details/api.service';
@@ -44,7 +44,6 @@ export class UsersList implements OnInit, AfterViewInit {
   @ViewChild('statusTemplate') statusTemplate!: TemplateRef<any>;
 
   onValueChange(user: User, value: boolean): void {
-    this.store.dispatch(startLoader());
     this.apiService
       .updateUser(
         { ...user, basicInfo: { ...user.basicInfo, status: value } },

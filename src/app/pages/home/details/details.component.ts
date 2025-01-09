@@ -9,7 +9,7 @@ import { DetailsHeaderComponent } from '../../../components/details-header/detai
 import { formGroup } from '../../../constants/users';
 import { ConcatStringPipe } from '../../../pipes/concat-string.pipe';
 import { StorageService } from '../../../services/storage.service';
-import { snackBar, startLoader, stopLoader } from '../../../stores/app.action';
+import { snackBar } from '../../../stores/app.action';
 import { getUsers } from '../../../stores/app.selector';
 import { User } from '../../../ts/User.types';
 import { Api } from './api.service';
@@ -63,23 +63,19 @@ export class UserDetails implements OnInit, AfterViewInit {
   }
 
   createUser(): void {
-    this.store.dispatch(startLoader());
     this.apiService.createUser({ ...this.userForm.value }).subscribe(() => {
       this.store.dispatch(snackBar({ message: 'User created successfully' }));
       this.apiService.fetchUsers();
-      this.store.dispatch(stopLoader());
       this.router.navigate(['/users']);
     });
   }
 
   updateUser(): void {
-    this.store.dispatch(startLoader());
     this.apiService
       .updateUser({ ...this.userForm.value }, this.currentUser.id)
       .subscribe(() => {
         this.store.dispatch(snackBar({ message: 'User updated successfully' }));
         this.apiService.fetchUsers();
-        this.store.dispatch(stopLoader());
         this.router.navigate(['/users']);
       });
   }
