@@ -64,7 +64,8 @@ export class AutoCompleteComponent {
   }
 
   onClear(): void {
-    console.log('clearing');
+    this.input.nativeElement.value = '';
     this.control.setValue('');
+    this.filteredOptions = this.options.slice();
   }
 }
