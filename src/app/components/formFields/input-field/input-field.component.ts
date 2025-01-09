@@ -8,9 +8,10 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { FormErrorMessagePipe } from '../../../pipes/form-error-message.pipe';
 
 @Component({
   selector: 'input-field',
@@ -21,11 +22,12 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     ReactiveFormsModule,
     CommonModule,
+    FormErrorMessagePipe,
   ],
   templateUrl: './input-field.component.html',
   styleUrl: './input-field.component.scss',
 })
-export class InputFieldComponent implements OnChanges, OnInit {
+export class InputFieldComponent {
   @Input() label: string = 'Name';
   @Input() control: any = null;
   @Input() name: string = 'name';
@@ -33,14 +35,8 @@ export class InputFieldComponent implements OnChanges, OnInit {
   @Input() type: string = 'text';
   @Input() required: boolean = false;
   @Input() disabled: boolean = false;
-  @Input() value: any = '';
+  @Input() value: string = '';
   @Input() readonly: boolean = false;
 
   @Output() onValueChange: EventEmitter<any> = new EventEmitter();
-
-  ngOnInit() {}
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(this.control.errors);
-  }
 }

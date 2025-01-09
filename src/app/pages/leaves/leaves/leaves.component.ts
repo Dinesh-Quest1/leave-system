@@ -1,13 +1,12 @@
-import { Component, inject } from '@angular/core';
-import { ListHeaderComponent } from '../../../components/list-header/list-header.component';
-import { Store } from '@ngrx/store';
-import { getLeaves, getUsers } from '../../../stores/app.selector';
-import { Router } from '@angular/router';
-import { CardComponent } from '../../../components/card/card.component';
-import { GroupArrayByKeyPipe } from '../../../pipes/group-array-by-key.pipe';
 import { CommonModule } from '@angular/common';
-import { User } from '../../../ts/User.types';
+import { Component, inject } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { CardComponent } from '../../../components/card/card.component';
+import { ListHeaderComponent } from '../../../components/list-header/list-header.component';
+import { GroupArrayByKeyPipe } from '../../../pipes/group-array-by-key.pipe';
+import { getLeaves, getUsers } from '../../../stores/app.selector';
 import { Leave } from '../../../ts/Leave.types';
+import { User } from '../../../ts/User.types';
 
 @Component({
   selector: 'leaves',
@@ -25,7 +24,6 @@ export class LeavesComponent {
   list: Leave[] = [];
   users: User[] = [];
   filteredList: Leave[] = [];
-
   selectedUser: User = null;
 
   onSelectedUser(user: User): void {

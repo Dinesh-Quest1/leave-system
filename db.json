@@ -1,0 +1,64 @@
+{
+  "users": [
+    {
+      "basicInfo": {
+        "firstName": "Dinesh",
+        "lastName": "Kumar R",
+        "email": "dinesh.kumar@vhitechlab.com",
+        "phoneNumber": "7448993030",
+        "status": true
+      },
+      "primaryContactInfo": {
+        "address": "10, main road",
+        "street": "10, main road",
+        "city": "Chennai",
+        "state": "Tamilnadu",
+        "pincode": "600234"
+      },
+      "secondaryContactInfo": {
+        "address": "10, main road",
+        "street": "10, main road",
+        "city": "Chennai",
+        "state": "Tamilnadu",
+        "pincode": "600234",
+        "usePrimaryContact": true
+      },
+      "id": "fcae"
+    },
+    {
+      "id": "c6c6",
+      "basicInfo": {
+        "firstName": "David",
+        "lastName": "Charles",
+        "email": "dinesh.kumar@vhitechlab.com",
+        "phoneNumber": "7448993029",
+        "status": false
+      },
+      "primaryContactInfo": {
+        "address": "10, main road",
+        "street": "10, main road",
+        "city": "Chennai",
+        "state": "Tamilnadu",
+        "pincode": "600234"
+      },
+      "secondaryContactInfo": {
+        "address": "",
+        "street": "",
+        "city": "",
+        "state": "",
+        "pincode": "",
+        "usePrimaryContact": false
+      }
+    }
+  ],
+  "leaves": [
+    {
+      "id": "dc80",
+      "typeOfLeave": "Sick",
+      "comments": "",
+      "startDate": "1998-01-11",
+      "endDate": "2025-01-17",
+      "userId": "fcae"
+    }
+  ]
+}

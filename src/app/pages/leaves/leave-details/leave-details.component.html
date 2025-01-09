@@ -1,7 +1,8 @@
 <details-header
-  (onSave)="onSubmit($event)"
+  (onSave)="onSubmit()"
   [title]="
-    currentUser?.basicInfo?.firstName + ' ' + currentUser?.basicInfo?.lastName
+    currentUser?.basicInfo?.firstName
+      | concatString : [currentUser?.basicInfo?.lastName]
   "
   [disableLeave]="!currentUser"
   (onCancel)="onCancel()"
@@ -30,6 +31,12 @@
         [name]="'endDate'"
         [label]="'End Date'"
         [control]="leaveForm.get('endDate')"
+        [error]="
+          this.leaveForm.errors?.['dateExceeds']
+            ? this.leaveForm.errors?.['dateExceeds']?.error
+            : null
+        "
+        [valid]="!this.leaveForm.errors?.['dateExceeds']?.error"
       ></date-field>
     </div>
   </div>

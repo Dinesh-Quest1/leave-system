@@ -1,4 +1,4 @@
-export type User = {
+export interface User {
   id?: number | string;
   basicInfo: {
     firstName: string;
@@ -22,7 +22,7 @@ export type User = {
     pincode?: string | number;
     usePrimaryContact?: [false];
   };
-};
+}
 
 export type UsersById = {
   [id: string]: User[];

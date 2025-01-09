@@ -4,6 +4,6 @@
   [pageSize]="pageSize"
   [pageSizeOptions]="pageOptions"
   aria-label="Select page"
-  (page)="paginationChanges($event)"
+  (page)="onPaginationChange.emit($event)"
 >
 </mat-paginator>

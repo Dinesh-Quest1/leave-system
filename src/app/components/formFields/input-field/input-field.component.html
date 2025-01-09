@@ -10,13 +10,6 @@
     [disabled]="disabled"
   />
   <mat-error *ngIf="control?.invalid && (control?.touched || control?.dirty)">
-    <span *ngIf="control?.errors?.['required']">{{ label }} is required.</span>
-    <span *ngIf="control?.errors?.['email']"
-      >Please enter a valid email address.</span
-    >
-    <span *ngIf="control?.errors?.['minlength']">
-      Minimum length is
-      {{ control.errors["minlength"].requiredLength }} characters.
-    </span>
+    <span *ngIf="!control.valid">{{ control | formErrorMessage : label }}</span>
   </mat-error>
 </mat-form-field>

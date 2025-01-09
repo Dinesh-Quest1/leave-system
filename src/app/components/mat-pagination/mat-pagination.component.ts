@@ -1,11 +1,5 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'mat-pagination',
@@ -20,19 +14,5 @@ export class MatPaginationComponent {
   @Input() currentPage: number | undefined;
   @Input() length: number | undefined;
 
-  @Output() onPageChange: EventEmitter<number> = new EventEmitter();
-  @Output() onPageSizeChange: EventEmitter<number> = new EventEmitter();
-  @Output() onPaginationChange: EventEmitter<number> = new EventEmitter();
-
-  paginationChanges(event: any) {
-    this.onPaginationChange.emit(event);
-  }
-
-  changePageSize(event: any) {
-    this.onPageSizeChange.emit(+event.target.value);
-  }
-
-  changePage(page: number) {
-    this.onPageChange.emit(+page);
-  }
+  @Output() onPaginationChange: EventEmitter<PageEvent> = new EventEmitter();
 }

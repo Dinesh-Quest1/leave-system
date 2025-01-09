@@ -1,11 +1,8 @@
 <details-header
   (onSave)="onSubmit()"
   [title]="
-    currentUser
-      ? currentUser?.basicInfo?.firstName +
-        ' ' +
-        currentUser?.basicInfo?.lastName
-      : 'New User'
+    currentUser?.basicInfo?.firstName
+      | concatString : [currentUser?.basicInfo?.lastName] : 'New User'
   "
   [disableLeave]="!currentUser"
   (onCancel)="onCancel()"
@@ -35,6 +32,7 @@
           userForm.get('secondaryContactInfo').get('usePrimaryContact').value ||
           isViewMode
         "
+        [viewMode]="isViewMode"
       ></secondary-contact-info>
     </div>
   </div>

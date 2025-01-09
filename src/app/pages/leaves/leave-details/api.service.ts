@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Leave } from '../../../ts/Leave.types';
 import { ApiService } from '../../../services/api.service';
 import { API_PATHS } from '../../../constants/apiPaths';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { loadLeave } from '../../../stores/app.action';
 import { formatDate } from '@angular/common';
+import { Leave } from '../../../ts/Leave.types';
 
 @Injectable({
   providedIn: 'root',
@@ -30,11 +30,8 @@ export class Api {
 
   fetchLeaves(): void {
     this.apiService.getAll(API_PATHS.LEAVES).subscribe((leaves: Leave[]) => {
-      this.store.dispatch(
-        loadLeave({
-          value: leaves.sort((a: any, b: any) => b.userId - a.userId),
-        })
-      );
+      const sortedLeaves = leaves.sort((a: any, b: any) => b.userId - a.userId);
+      this.store.dispatch(loadLeave({ value: sortedLeaves }));
     });
   }
 }

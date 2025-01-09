@@ -1,98 +1,27 @@
 import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
-  inject,
   OnInit,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { InputFieldComponent } from '../../../components/formFields/input-field/input-field.component';
-import { SwitchComponent } from '../../../components/formFields/switch/switch.component';
 import { MatBaseTableComponent } from '../../../components/mat-base-table/mat-base-table.component';
-import { User } from '../../../ts/User.types';
+import { StatusComponent } from '../../../components/status/status.component';
+import { columns } from '../../../constants/columns';
 import { ApiService } from '../../../services/api.service';
+import { snackBar } from '../../../stores/app.action';
 import { getUsers } from '../../../stores/app.selector';
+import { User } from '../../../ts/User.types';
 import { Api } from '../details/api.service';
-import { StatusComponent } from '../status/status.component';
-import { snackBar, startLoader } from '../../../stores/app.action';
-
-const columns = [
-  {
-    header: 'Name',
-    field: 'basicInfo',
-    format: (data: any) => {
-      return data?.firstName + ' ' + data?.lastName || '';
-    },
-  },
-  {
-    header: 'Phone Number',
-    field: 'basicInfo',
-    format: (data: any) => data?.phoneNumber || '',
-  },
-  {
-    header: 'Primary Address',
-    field: 'primaryContactInfo',
-    format: (data: any) => data?.address || '',
-  },
-  {
-    header: 'Pincode',
-    field: 'primaryContactInfo',
-    format: (data: any) => data?.pincode || '',
-  },
-  {
-    header: 'Status',
-    field: 'primaryContactInfo',
-    format: (data: any) => (data?.status ? 'Active' : 'Inactive'),
-    templateName: 'statusTemplate',
-  },
-  {
-    header: 'Actions',
-    field: 'actions',
-    actions: [
-      {
-        header: 'edit',
-        icon: 'edit',
-        iconColor: 'primary',
-        label: 'Edit',
-        action: (item: User, router: Router) => {
-          router.navigateByUrl(`/users/details/${item?.id}?action=edit`);
-        },
-      },
-      {
-        header: 'view',
-        icon: 'visibility',
-        iconColor: 'accent',
-        label: 'View',
-        action: (item: User, router: Router) => {
-          router.navigateByUrl(`/users/details/${item?.id}?action=view`);
-        },
-      },
-      {
-        header: 'delete',
-        icon: 'delete',
-        iconColor: 'warn',
-
-        label: 'Delete',
-        action: (item: User) => console.log('Delete clicked', item),
-      },
-    ],
-  },
-];
 
 @Component({
   selector: 'users-list',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatBaseTableComponent,
-    InputFieldComponent,
-    SwitchComponent,
-    StatusComponent,
-  ],
+  imports: [CommonModule, MatBaseTableComponent, StatusComponent],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
   providers: [ApiService],
@@ -104,22 +33,23 @@ export class UsersList implements OnInit, AfterViewInit {
   pageSize = 5;
   columns: any[] = columns;
   deleteId: any;
-  apiService: Api = inject(Api);
 
-  constructor(private readonly router: Router, private readonly store: Store) {}
+  constructor(
+    private readonly router: Router,
+    private readonly store: Store,
+    private readonly apiService: Api,
+    private readonly cdr: ChangeDetectorRef
+  ) {}
 
   @ViewChild('statusTemplate') statusTemplate!: TemplateRef<any>;
 
-  statusControl = new FormControl('');
-
   onValueChange(user: User, value: boolean): void {
-    this.store.dispatch(startLoader());
     this.apiService
       .updateUser(
         { ...user, basicInfo: { ...user.basicInfo, status: value } },
         user?.id
       )
-      .subscribe((value) => {
+      .subscribe(() => {
         this.apiService.fetchUsers();
       });
   }
@@ -148,10 +78,11 @@ export class UsersList implements OnInit, AfterViewInit {
       }
       return column;
     });
+    this.cdr.detectChanges();
   }
 
   deleteUser(user: any): void {
-    this.apiService.deleteUser(user?.id).subscribe((response: any) => {
+    this.apiService.deleteUser(user?.id).subscribe(() => {
       this.store.dispatch(snackBar({ message: 'User deleted successfully' }));
       this.apiService.fetchUsers();
     });

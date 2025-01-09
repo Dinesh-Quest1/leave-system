@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPseudoCheckboxModule } from '@angular/material/core';
 
@@ -20,7 +20,7 @@ import { MatPseudoCheckboxModule } from '@angular/material/core';
 })
 export class CheckBoxComponent {
   @Input() label: string = '';
-  @Input() control: any;
+  @Input() control: FormControl<any> | null = null;
   @Input() name: string = '';
   @Input() disabled: boolean = false;
 

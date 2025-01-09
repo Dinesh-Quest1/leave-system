@@ -1,14 +1,9 @@
-import {
-  Component,
-  ElementRef,
-  Input,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'auto-complete',
@@ -19,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatInputModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
+    MatIconModule,
   ],
   templateUrl: './auto-complete.component.html',
   styleUrl: './auto-complete.component.scss',
@@ -26,7 +22,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 export class AutoCompleteComponent {
   @ViewChild('input') input: ElementRef<HTMLInputElement>;
   @Input() label: string = 'Name';
-  @Input() control: any = null;
+  @Input() control: FormControl<any> | null = null;
   @Input() options: any[] = [];
   @Input() displayWith?: string = 'name';
   @Input() renderOption?: Function = () => {};
@@ -36,7 +32,7 @@ export class AutoCompleteComponent {
   @Input() disabled: boolean = false;
   @Input() value: any = '';
 
-  filteredOptions: string[];
+  filteredOptions: any[];
 
   constructor() {
     this.filteredOptions = this.options.slice();
@@ -45,11 +41,14 @@ export class AutoCompleteComponent {
   filter(): void {
     const filterValue = this.input.nativeElement.value.toLowerCase();
     this.filteredOptions = this.options.filter((option) => {
-      const optionValue = this.renderOption
-        ? this.renderOption(option)
-        : this.displayWith
-        ? option?.[this.displayWith]
-        : option;
+      let optionValue;
+      if (this.renderOption) {
+        optionValue = this.renderOption(option);
+      } else if (this.displayWith) {
+        optionValue = option?.[this.displayWith];
+      } else {
+        optionValue = option;
+      }
       return optionValue.toLowerCase().includes(filterValue);
     });
   }
@@ -64,7 +63,8 @@ export class AutoCompleteComponent {
     return option;
   }
 
-  ngOnInit() {
-    console.log(this.input);
+  onClear(): void {
+    console.log('clearing');
+    this.control.setValue('');
   }
 }
