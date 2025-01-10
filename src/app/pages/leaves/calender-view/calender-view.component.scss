@@ -1,0 +1,42 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 1rem 2rem;
+  margin-top: 1rem;
+}
+.month-selector {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.month-name {
+  margin: 0;
+  width: 150px;
+  text-align: center;
+}
+.icon {
+  cursor: pointer;
+}
+.container {
+  padding: 2rem;
+  max-height: calc(100vh - 150px);
+  overflow: auto;
+  margin-inline: auto;
+}
+.weekName {
+  text-align: start;
+  margin: 0;
+}
+.weekNameSection {
+  display: flex;
+  justify-content: flex-start;
+}
+mat-grid-tile .weekNameSection {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: red;
+}

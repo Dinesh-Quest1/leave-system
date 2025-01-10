@@ -1,0 +1,37 @@
+<div class="header">
+  <h2>Leaves</h2>
+  <div class="month-selector">
+    <mat-icon
+      fontIcon="arrow_back"
+      (click)="onMonthChange('back')"
+      class="icon"
+    ></mat-icon>
+    <h3 class="month-name">{{ currentMonthName }}</h3>
+    <mat-icon
+      fontIcon="arrow_forward"
+      (click)="onMonthChange('forward')"
+      class="icon"
+    ></mat-icon>
+  </div>
+</div>
+<div class="container">
+  <mat-grid-list cols="7" rowHeight="6:1">
+    <mat-grid-tile
+      *ngFor="let weekDay of weekDays; let i = index"
+      class="weekNameSection"
+      ><h3 class="weekName">{{ weekDay }}</h3></mat-grid-tile
+    >
+  </mat-grid-list>
+  <mat-grid-list cols="7" rowHeight="2:1.1">
+    <ng-container *ngFor="let dayOfMonth of datesOfMonth; let i = index">
+      <mat-grid-tile
+        ><day-of-month
+          [date]="dayOfMonth"
+          [withMonth]="
+            (i === 0 && dayOfMonth?.previous) || dayOfMonth?.firstDay
+          "
+        ></day-of-month
+      ></mat-grid-tile>
+    </ng-container>
+  </mat-grid-list>
+</div>
