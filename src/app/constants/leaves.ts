@@ -12,3 +12,12 @@ export const formGroup = formBuilder.group(
   },
   { validators: [minDate()] }
 );
+export const weekDays = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
