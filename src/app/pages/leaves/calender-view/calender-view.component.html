@@ -30,6 +30,7 @@
           [withMonth]="
             (i === 0 && dayOfMonth?.previous) || dayOfMonth?.firstDay
           "
+          [leaves]="list | groupArrayByKey : 'startDate'"
         ></day-of-month
       ></mat-grid-tile>
     </ng-container>

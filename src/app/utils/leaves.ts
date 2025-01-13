@@ -1,3 +1,5 @@
+import { Leave } from '../ts/Leave.types';
+
 export function getMonthAsString(date: Date | null): string {
   if (!date) return '';
   return date.toLocaleString('en-US', { month: 'long', year: 'numeric' });
@@ -59,4 +61,44 @@ export function getAllDatesOfMonth(
   }
 
   return allDates;
+}
+
+export function getLeavesByDate(leaves: Leave[]): any {
+  const leavesByDate = leaves.reduce((acc: any, leave) => {
+    let leaveData: any = { ...leave };
+    const leaveStartDate = new Date(leave.startDate);
+    const leaveEndDate = new Date(leave.endDate);
+
+    for (
+      let date = new Date(leaveStartDate);
+      date <= leaveEndDate;
+      date.setDate(date.getDate() + 1)
+    ) {
+      const formattedDate = date.toLocaleDateString('en-CA');
+
+      if (!acc[formattedDate]) {
+        acc[formattedDate] = [];
+      }
+      console.log(date.getTime() >= leaveEndDate.getTime());
+      if (date.getTime() <= leaveStartDate.getTime()) {
+        leaveData.startSpan = 0;
+      }
+      if (date.getTime() >= leaveEndDate.getTime()) {
+        leaveData.endSpan = 100;
+      }
+      if (
+        date.getTime() >= leaveStartDate.getTime() ||
+        date.getTime() <= leaveEndDate.getTime()
+      ) {
+        leaveData.startSpan = 0;
+        leaveData.endSpan = 100;
+      }
+
+      acc[formattedDate].push({ ...leaveData });
+    }
+
+    return acc;
+  }, {});
+
+  return leavesByDate;
 }
